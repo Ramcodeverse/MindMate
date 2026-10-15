@@ -2,163 +2,144 @@
 
 # 🧠 MindMate
 
-### *Your Mental Wellness Companion*
+### *Your Personal Mental Wellness Companion*
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-5.x-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Gemini](https://img.shields.io/badge/Google_Gemini-3.8_Flash-8E75B2?logo=google&logoColor=white)](https://ai.google.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**Mood tracking · Journaling · Habit building · AI therapy — all in one calming space.**
+**Mindful Check-Ins · Distraction-Free Journaling · Habit Anchors · Server-Side Gemini AI Reflection · Web Audio Soundscapes**
 
-[📸 Screenshots](#-screenshots) · [🐛 Report Bug](https://github.com/ramcodeverse/mindmate/issues) · [✨ Request Feature](https://github.com/ramcodeverse/mindmate/issues)
+[✨ Live Demo](https://ais-dev-gdjqll5bo7ez3gyatkgok2-528799930423.asia-east1.run.app) · [💼 Developer Portfolio](https://rams-portfolio-site.netlify.app) · [📂 Architecture](ARCHITECTURE.md) · [🔒 Security Policy](SECURITY.md) · [📖 API Reference](API.md)
 
 </div>
 
 ---
 
-## 📌 About
+## 🌿 About MindMate
 
-**MindMate** is a full-stack mental wellness app that combines **mood tracking**, **habit management**, **personal journaling**, and an **AI therapy chatbot** in one thoughtfully designed space.
+**MindMate** is a full-stack mental wellness sanctuary crafted to provide a calm, emotionally supportive space to pause, reflect, and cultivate emotional balance.
 
-It's built to give you a quiet, safe corner of the internet to reflect, grow, and feel supported — every single day.
+Unlike noisy wellness apps filled with aggressive gamification, social comparison, or clinical jargon, MindMate emphasizes **gentle consistency**, **100% user data sovereignty**, and **compassionate AI reflection**.
 
 ---
 
-## ✨ Features
+## ✨ Production Features
 
 | Feature | Description |
 |---|---|
-| 😄 **Mood Tracker** | Log your mood with emojis and notes; spot emotional patterns over time |
-| 📓 **Daily Journal** | Private, timestamped journaling with emotional context |
-| 📊 **Habit Tracker** | Build and maintain healthy habits with visual progress tracking |
-| 🤖 **AI Therapist** | Conversational AI chatbot for support, reflection, and motivation |
-| 📅 **Calendar View** | See your mood and habit history at a glance |
-| 🔐 **Auth System** | Secure JWT-based login and registration |
-| ☁️ **Cloud Sync** | Real-time data sync via MongoDB Atlas |
+| 🌿 **MindMate Calm Design** | An emotionally supportive palette of soft sage (`#EAF2EC`), warm ivory (`#FBFBF7`), and deep forest green (`#163327`) with Plus Jakarta Sans typography. |
+| 📊 **5-Level Mood Rhythm** | Log daily emotional baseline, physical energy slider (1-10), and emotion nuances in 15 seconds. |
+| 📓 **Private Daily Journal** | Distraction-free canvas with live autosave, keyword search, tag filtering, word count, and public **Privacy Blur mode**. |
+| 🎯 **Habit Anchors & Streaks** | 7-day completion matrix with accurate consecutive day streak calculations and rewarding Web Audio chimes. |
+| 🤖 **Server-Side AI Reflection** | Empathetic reflection companion powered by `@google/genai` (**Gemini 3.8 Flash**). Never exposes API keys to client browsers. Seamless offline fallback. |
+| 🛡️ **Crisis Safety Safeguards** | Automated keyword scanner that instantly surfaces free 24/7 crisis hotlines (988 Lifeline, Crisis Text Line). |
+| 🌬️ **Guided Breathwork Sanctuary** | Interactive **4-7-8 Relaxing** and **4-4-4-4 Box Breathing** visual pacer with synthesized ambient rain/forest soundscapes. |
+| 📅 **Calendar & Day Inspector** | Month-at-a-glance visualization aggregating mood check-ins, completed habits, and journal reflections. |
+| 🔒 **Data Portability & Deletion** | Instant one-click full JSON data export (`GET /api/v1/users/me/export`) and irreversible cascade account purge. |
+| 🛡️ **Role-Based Admin Console** | Administrative interface for member directory inspection and system telemetry. |
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Architecture & Tech Stack
 
-**Frontend** — React.js, Tailwind CSS / Chakra UI, React Router, Framer Motion
-
-**Backend** — Node.js, Express.js, MongoDB + Mongoose, JWT
-
-**Deployment** — Vercel (frontend) · Render (backend)
-
----
-
-## 📸 Screenshots
-
-| Dashboard | AI Therapist | Habit Tracker |
-|:-:|:-:|:-:|
-| ![Dashboard](https://github.com/user-attachments/assets/e476a2ec-d8d9-4495-8d0f-9f9f6f3b6cb7) | ![AI Chat](https://github.com/user-attachments/assets/9978f2ab-20bb-4040-a6f5-780502ac6941) | ![Habits](https://github.com/user-attachments/assets/19ade466-93fd-4594-b68a-2c8f53ac25b5) |
-
-| Mood Tracker | Journal | Calendar |
-|:-:|:-:|:-:|
-| ![Mood](https://github.com/user-attachments/assets/6502e21a-e01a-425a-9b57-c28ad9a47314) | ![Journal](https://github.com/user-attachments/assets/4378e332-117c-47d0-95dd-5f73dbc5e80b) | ![Calendar](https://github.com/user-attachments/assets/418ea715-1acf-43d2-a0db-9cc656856a3d) |
+```
+Frontend:   React 18 · TypeScript · Vite · Tailwind CSS · Lucide Icons · Web Audio API
+Backend:    Node.js 22 · Express.js (v5) · tsx · CORS · Dotenv
+AI Service: @google/genai (Gemini 3.8 Flash) with safe server-side proxy
+Testing:    Node.js native test runner (`node:test`, `node:assert`) · 100% pass rate
+```
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **Node.js** v18+
-- **MongoDB Atlas** account
-- **AI API key** (for the chatbot)
+## 🚀 Quick Start & Local Setup
 
 ### 1. Clone the Repository
-
 ```bash
 git clone https://github.com/ramcodeverse/mindmate.git
 cd mindmate
 ```
 
-### 2. Set Up Environment Variables
-
+### 2. Install Dependencies
 ```bash
-cp .env.example server/.env
-```
-
-```env
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-AI_API_KEY=your_api_key
-```
-
-### 3. Run the Frontend
-
-```bash
-cd client
 npm install
+```
+
+### 3. Configure Environment Variables
+```bash
+cp .env.example .env
+```
+*(Optional) To enable live Gemini AI reflections, add your Gemini API key in `.env`:*
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+PORT=3000
+```
+*Note: MindMate functions fully offline even without an API key using the built-in empathetic sanctuary engine.*
+
+### 4. Run the Full-Stack Dev Server
+```bash
 npm run dev
 ```
+Open **`http://localhost:3000`** in your browser.
 
-### 4. Run the Backend
+### 5. Run Automated Tests
+```bash
+npm test
+```
+
+---
+
+## 👤 Sample Demo Accounts
+
+MindMate comes pre-seeded with rich, realistic wellness histories for portfolio review:
+
+| Role | Email | Password | What's Included |
+|---|---|---|---|
+| **Member** | `sarah.johnson@email.com` | `sarah123` | 10 days of mood check-ins, 3 journal entries, 4 habit anchors with 6-day streak, past reflections |
+| **Admin** | `admin@mindmate.com` | `admin123` | Access to the Administrative Directory & System Console |
+
+You can also create a new account or switch accounts instantaneously using the role switcher in the sidebar footer.
+
+---
+
+## 🧪 Automated Testing Evidence
+
+MindMate includes unit and integration tests covering core wellness logic:
 
 ```bash
-cd server
-npm install
-npm run start
+> npm test
+
+TAP version 13
+# Subtest: MindMate Wellness Core Logic
+    # Subtest: Consecutive Streak Calculation
+        ok 1 - returns 0 when completions array is empty
+        ok 2 - calculates active streak up to today
+        ok 3 - maintains streak if completed yesterday but not yet today
+        ok 4 - breaks streak when there is a missing day before yesterday
+    ok 1 - Consecutive Streak Calculation
+    # Subtest: Crisis Intent Detection & Safety Guardrails
+        ok 1 - detects crisis keywords correctly
+        ok 2 - provides compassionate non-clinical fallback response with user context
+    ok 2 - Crisis Intent Detection & Safety Guardrails
+    # Subtest: Store Operations & Data Integrity
+        ok 1 - creates and tracks journals with accurate word count
+        ok 2 - toggles habit completion and dynamically recalculates streaks
+        ok 3 - exports all user data in clean format without leaking credentials
+    ok 3 - Store Operations & Data Integrity
+ok 1 - MindMate Wellness Core Logic
+# tests 9
+# pass 9
+# fail 0
 ```
 
-> Frontend: `http://localhost:5173` · API: `http://localhost:5000`
-
 ---
 
-## 📂 Project Structure
+## 📄 License & Attribution
 
-```
-mindmate/
-├── client/               # React frontend
-│   ├── components/
-│   ├── pages/
-│   └── assets/
-├── server/               # Express backend
-│   ├── routes/
-│   ├── models/
-│   └── controllers/
-├── .env.example
-└── README.md
-```
+Licensed under the **MIT License**.
 
----
-
-## 🗺️ Roadmap
-
-- [x] Mood Tracker
-- [x] Daily Journal
-- [x] Habit Tracker with Calendar
-- [x] AI Therapy Chatbot
-- [ ] Push notifications & reminders
-- [ ] Habit badges and streaks
-- [ ] Voice note journaling
-- [ ] Mobile app (React Native)
-
----
-
-## 🤝 Contributing
-
-1. Fork the repo
-2. Create your branch: `git checkout -b feature/your-feature`
-3. Commit: `git commit -m 'Add: your feature'`
-4. Push: `git push origin feature/your-feature`
-5. Open a Pull Request
-
----
-
-## 📃 License
-
-Licensed under the **MIT License**. Free to use and build upon with proper attribution.
-
----
-
-<div align="center">
-
-*"Healing doesn't mean the damage never existed. It means the damage no longer controls your life."*
-
-Made with 💚 by [@ramcodeverse](https://github.com/ramcodeverse)
-
-</div>
+Crafted with 💚 by **[Ram](https://github.com/ramcodeverse)** · [Portfolio](https://rams-portfolio-site.netlify.app)

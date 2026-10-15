@@ -1,0 +1,6 @@
+{
+  "name": "MindMate",
+  "description": "Track your mood, build healthy habits, and get AI-powered emotional support with MindMate - your comprehensive mental wellness companion.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
