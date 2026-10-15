@@ -13,6 +13,7 @@ import AdminPanel from './components/AdminPanel';
 import AuthModal from './components/AuthModal';
 import { LandingPage } from './components/LandingPage';
 import { BreathingModal } from './components/BreathingModal';
+import { PageTransition } from './components/motion/PageTransition';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { DataProvider } from './context/DataContext';
 import { LayoutDashboard, Smile, BookOpen, CheckSquare, Sparkles } from 'lucide-react';
@@ -134,7 +135,9 @@ function AppContent() {
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-24 lg:pb-12 max-w-7xl w-full mx-auto">
-          {renderView()}
+          <PageTransition viewKey={currentView}>
+            {renderView()}
+          </PageTransition>
         </main>
       </div>
 

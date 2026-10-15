@@ -8,18 +8,38 @@
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --color-canvas: #FAFCF9;
-  --color-forest-dark: #142E1F;
-  --color-forest: #1F3D2B;
-  --color-forest-light: #2C5E43;
-  --color-sage-soft: #EDF4EF;
-  --color-sage-mist: #F4F8F5;
+  --color-serenity-forest: #174C3C;
+  --color-serenity-evergreen: #102F27;
+  --color-serenity-sage: #A9C7B2;
+  --color-serenity-mint: #E2F1E6;
+  --color-serenity-ivory: #F8F7F1;
+  --color-serenity-white: #FFFFFF;
+  --color-serenity-lavender: #EAE6F7;
+  --color-serenity-peach: #F4DDD0;
+  --color-serenity-primary: #20352C;
+  --color-serenity-secondary: #66766C;
+  --color-serenity-border: #E3E9E2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #F8FAF7;
-  color: #163327;
+  background-color: var(--color-serenity-ivory);
+  color: var(--color-serenity-primary);
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
