@@ -140,3 +140,135 @@ export interface MoodPatternInsight {
   userCorrection?: string;
   detectedAt: string;
 }
+
+export interface UnifiedRecommendationRequest {
+  mood: {
+    primaryEmotion: string;
+    secondaryEmotion?: string;
+    energyLevel: number;
+    stressLevel: number;
+    primaryIntention: string;
+    secondaryIntentions?: string[];
+    personalNote?: string;
+  };
+  profile: {
+    responseLanguage?: string;
+    musicLanguages?: string[];
+    movieLanguages?: string[];
+    viewingRegion?: string;
+    subtitlesOrDubbed?: string;
+    favoriteMusicGenres?: string[];
+    musicArtistsOrSongs?: string;
+    musicAvoidances?: string;
+    favoriteMovieGenres?: string[];
+    movieFilmmakersOrActors?: string;
+    movieDurationPreference?: string;
+    movieAvoidances?: string;
+    psychologyGuidance?: {
+      musicDirection: string;
+      musicConsideration: string;
+      movieDirection: string;
+      movieEstablish: string;
+      chosenMusicFocus?: string;
+      chosenMovieGoal?: string;
+    };
+  };
+  conversation: {
+    sectionA: {
+      kindOfDay: string;
+      helpfulNow?: string;
+      timeAvailable: string;
+      supportStyle: string;
+    };
+    sectionB: {
+      sessionResponseLanguage: string;
+      sessionMusicLanguages: string[];
+      sessionMovieLanguages: string[];
+      contentToAvoid: string[];
+      avoidNote?: string;
+    };
+    sectionC: {
+      musicSoundKind: string;
+      listeningStyle: string;
+      familiarVsDiscovery: string;
+      intensity: string;
+      musicNotes?: string;
+    };
+    sectionD: {
+      movieExperience: string;
+      movieDuration: string;
+      viewingEnvironment: string;
+      smallActivities: string[];
+      effortLevel: string;
+      practicalLimitations: string[];
+    };
+    finalQuestion?: string;
+  };
+  historyStats?: {
+    totalCompletions?: number;
+    savedCount?: number;
+    ratedCount?: number;
+  };
+}
+
+export interface UnifiedSongItem {
+  id: string;
+  title: string;
+  artist: string;
+  language: string;
+  genre: string;
+  whyFits: string;
+  isSavedMatchOrDiscovery: 'Saved Preference' | 'New Discovery' | 'Curated Match';
+  searchUrl: string;
+  spotifySearchUrl: string;
+  youtubeSearchUrl: string;
+}
+
+export interface UnifiedMovieItem {
+  id: string;
+  title: string;
+  year: string | number;
+  language: string;
+  genre: string;
+  description: string;
+  whyFits: string;
+  duration: string;
+  suggestedPlatform: string;
+  platformSearchUrl: string;
+  ottVerified: false;
+}
+
+export interface UnifiedRecommendationResponse {
+  sessionSummary: string;
+  moodInterpretation: string;
+  reasoningExplanation: string;
+  recommendedHabit: {
+    title: string;
+    whyHelpful: string;
+    estimatedTime: string;
+    instructions: string[];
+    effortLevel: string;
+    alternative: string;
+  };
+  restorativeExercise: {
+    title: string;
+    type: string;
+    duration: string;
+    instructions: string[];
+    alternative: string;
+    isOptional: boolean;
+  };
+  musicRecommendations: UnifiedSongItem[];
+  movieRecommendations: UnifiedMovieItem[];
+  userQuestionAnswer?: string | null;
+  nextSmallStep: {
+    action: string;
+    suggestion: string;
+  };
+  uncertaintiesOrLimitations: string;
+  meta: {
+    provider: 'gemini' | 'mindmate-curated-fallback';
+    generatedAt: string;
+    isCrisis?: boolean;
+  };
+}

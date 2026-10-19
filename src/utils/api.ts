@@ -1,4 +1,4 @@
-import { User, MoodEntry, JournalEntry, Habit, DashboardSummary, AIConversation, MoodPatternInsight } from '../types';
+import { User, MoodEntry, JournalEntry, Habit, DashboardSummary, AIConversation, MoodPatternInsight, UnifiedRecommendationRequest, UnifiedRecommendationResponse } from '../types';
 
 const TOKEN_KEY = 'mindmate_auth_token';
 
@@ -137,6 +137,11 @@ export const api = {
     const qs = params.toString();
     return apiFetch<RecommendationItem[]>(`/recommendations${qs ? `?${qs}` : ''}`);
   },
+  generateUnifiedRecommendations: (payload: UnifiedRecommendationRequest) =>
+    apiFetch<UnifiedRecommendationResponse>('/recommendations/unified', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
   toggleSaveRecommendation: (id: string) =>
     apiFetch<{ id: string; isSaved: boolean }>(`/recommendations/${id}/save`, { method: 'POST' }),
   likeRecommendation: (id: string) =>

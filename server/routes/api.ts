@@ -1,9 +1,15 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { mindMateStore } from '../store.js';
-import { generateReflectionReply } from '../aiService.js';
+import { generateReflectionReply, generateUnifiedRecommendations, UnifiedRecommendationRequest } from '../aiService.js';
 import { MoodCategory } from '../types.js';
 
 export const apiRouter = Router();
+
+// Rate limiting & concurrency guard for consolidated Gemini recommendations
+const activeUserGenerations = new Set<string>();
+const userRateLimits = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const MAX_REQUESTS_PER_WINDOW = 15;
 
 // Middleware to authenticate and attach current user
 export interface AuthenticatedRequest extends Request {
@@ -184,6 +190,67 @@ apiRouter.get('/recommendations', authMiddleware, (req: AuthenticatedRequest, re
   });
 
   return res.json(recs);
+});
+
+// Single Consolidated Gemini Recommendation Pipeline
+apiRouter.post('/recommendations/unified', authMiddleware, async (req: AuthenticatedRequest, res: Response) => {
+  const userId = req.userId || 'usr_guest';
+
+  // 1. Prevent duplicate concurrent submissions
+  if (activeUserGenerations.has(userId)) {
+    return res.status(409).json({
+      error: 'A personalized recommendation request is already in progress. Please wait for it to complete.',
+    });
+  }
+
+  // 2. Enforce sliding window rate limit (15 requests / 10 min)
+  const now = Date.now();
+  const userTimestamps = (userRateLimits.get(userId) || []).filter(ts => now - ts < RATE_LIMIT_WINDOW_MS);
+  if (userTimestamps.length >= MAX_REQUESTS_PER_WINDOW) {
+    const oldest = userTimestamps[0];
+    const waitSeconds = Math.ceil((RATE_LIMIT_WINDOW_MS - (now - oldest)) / 1000);
+    return res.status(429).json({
+      error: `Rate limit reached. Please wait ${waitSeconds}s before generating another session.`,
+      retryAfterSeconds: waitSeconds,
+    });
+  }
+
+  // 3. Validate request payload
+  const body = req.body as UnifiedRecommendationRequest;
+  if (!body || !body.mood || !body.mood.primaryEmotion) {
+    return res.status(400).json({ error: 'Invalid recommendation request: mood data is required.' });
+  }
+
+  // Sanitize text fields
+  if (body.conversation?.finalQuestion && body.conversation.finalQuestion.length > 600) {
+    body.conversation.finalQuestion = body.conversation.finalQuestion.substring(0, 600);
+  }
+  if (body.mood?.personalNote && body.mood.personalNote.length > 300) {
+    body.mood.personalNote = body.mood.personalNote.substring(0, 300);
+  }
+
+  activeUserGenerations.add(userId);
+  userTimestamps.push(now);
+  userRateLimits.set(userId, userTimestamps);
+
+  try {
+    const user = mindMateStore.getUserById(userId);
+    const saved = mindMateStore.getSavedContent(userId);
+    const result = await generateUnifiedRecommendations(body, {
+      userName: user?.name || 'Friend',
+      historyStats: {
+        savedCount: saved?.length || 0,
+      },
+    });
+
+    return res.json(result);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Failed to generate recommendations';
+    console.error('[API /recommendations/unified error]', err);
+    return res.status(500).json({ error: message });
+  } finally {
+    activeUserGenerations.delete(userId);
+  }
 });
 
 apiRouter.post('/recommendations/:id/save', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
