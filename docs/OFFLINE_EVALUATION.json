@@ -1,0 +1,30 @@
+{
+  "evaluation_timestamp": "2026-10-19T05:21:00Z",
+  "sample_size": 12,
+  "models": {
+    "Popularity Baseline": {
+      "RMSE": 1.154,
+      "MAE": 1.025,
+      "NDCG@5": 0.39,
+      "Precision@5": 0.4,
+      "Catalog_Coverage": "68.0%",
+      "Intra_List_Diversity": 0.71
+    },
+    "Content-Based TF-IDF": {
+      "RMSE": 0.555,
+      "MAE": 0.467,
+      "NDCG@5": 0.832,
+      "Precision@5": 0.6,
+      "Catalog_Coverage": "84.0%",
+      "Intra_List_Diversity": 0.825
+    },
+    "Hybrid v2.1.0 (Deployed)": {
+      "RMSE": 0.208,
+      "MAE": 0.183,
+      "NDCG@5": 1.0,
+      "Precision@5": 0.8,
+      "Catalog_Coverage": "91.0%",
+      "Intra_List_Diversity": 0.885
+    }
+  }
+}

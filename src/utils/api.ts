@@ -120,4 +120,71 @@ export const api = {
     }),
   exportDataUrl: () => `/api/v1/users/me/export`,
   deleteAccount: () => apiFetch<{ message: string }>('/users/me', { method: 'DELETE' }),
+
+  // Recommendations & Discovery Engine
+  getRecommendations: (options: { type?: string; intention?: string; mood?: string; limit?: number } = {}) => {
+    const params = new URLSearchParams();
+    if (options.type) params.set('type', options.type);
+    if (options.intention) params.set('intention', options.intention);
+    if (options.mood) params.set('mood', options.mood);
+    if (options.limit) params.set('limit', String(options.limit));
+    const qs = params.toString();
+    return apiFetch<RecommendationItem[]>(`/recommendations${qs ? `?${qs}` : ''}`);
+  },
+  toggleSaveRecommendation: (id: string) =>
+    apiFetch<{ id: string; isSaved: boolean }>(`/recommendations/${id}/save`, { method: 'POST' }),
+  likeRecommendation: (id: string) =>
+    apiFetch<{ id: string; action: string; message: string }>(`/recommendations/${id}/like`, { method: 'POST' }),
+  dislikeRecommendation: (id: string) =>
+    apiFetch<{ id: string; action: string; message: string }>(`/recommendations/${id}/dislike`, { method: 'POST' }),
+  rateRecommendation: (id: string, rating: number) =>
+    apiFetch<{ id: string; rating: number; message: string }>(`/recommendations/${id}/rate`, {
+      method: 'POST',
+      body: JSON.stringify({ rating }),
+    }),
+  dismissRecommendation: (id: string) =>
+    apiFetch<{ message: string }>(`/recommendations/${id}/dismiss`, { method: 'POST' }),
+  submitRecommendationFeedback: (id: string, action: 'fit_feedback' | 'rate', value: string | number) =>
+    apiFetch<{ message: string }>(`/recommendations/${id}/feedback`, {
+      method: 'POST',
+      body: JSON.stringify({ action, value }),
+    }),
+  getSavedRecommendations: () => apiFetch<RecommendationItem[]>('/recommendations/saved'),
+  resetRecommendationPreferences: () =>
+    apiFetch<{ message: string }>('/recommendations/reset-preferences', { method: 'POST' }),
+  searchCatalog: (q: string, options: { type?: string; genre?: string; mood?: string } = {}) => {
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (options.type) params.set('type', options.type);
+    if (options.genre) params.set('genre', options.genre);
+    if (options.mood) params.set('mood', options.mood);
+    const qs = params.toString();
+    return apiFetch<{ query: string; count: number; items: RecommendationItem[] }>(`/catalog/search${qs ? `?${qs}` : ''}`);
+  },
+  getCatalogMovies: (params: { genre?: string; mood?: string; q?: string } = {}) => {
+    const sp = new URLSearchParams();
+    if (params.genre) sp.set('genre', params.genre);
+    if (params.mood) sp.set('mood', params.mood);
+    if (params.q) sp.set('q', params.q);
+    const qs = sp.toString();
+    return apiFetch<RecommendationItem[]>(`/catalog/movies${qs ? `?${qs}` : ''}`);
+  },
+  getCatalogMusic: (params: { genre?: string; mood?: string; q?: string } = {}) => {
+    const sp = new URLSearchParams();
+    if (params.genre) sp.set('genre', params.genre);
+    if (params.mood) sp.set('mood', params.mood);
+    if (params.q) sp.set('q', params.q);
+    const qs = sp.toString();
+    return apiFetch<RecommendationItem[]>(`/catalog/music${qs ? `?${qs}` : ''}`);
+  },
+  getCatalogCategories: () =>
+    apiFetch<{ moodCategories: string[]; musicGenres: string[]; movieGenres: string[]; intentions: string[] }>('/catalog/categories'),
+  getPreferences: () =>
+    apiFetch<{ preferences: User['preferences']; derivedVector: unknown }>('/preferences'),
+  updatePreferences: (data: Partial<User['preferences']>) =>
+    apiFetch<User>('/preferences', { method: 'PUT', body: JSON.stringify(data) }),
+  resetPreferences: () =>
+    apiFetch<{ message: string }>('/preferences/reset', { method: 'DELETE' }),
+  getModelRegistry: () =>
+    apiFetch<{ activeModel: unknown; allModels: unknown[] }>('/ml/models'),
 };

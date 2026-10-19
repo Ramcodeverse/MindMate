@@ -2,27 +2,32 @@ import React, { useState } from 'react';
 import { Sidebar, ViewType } from './components/Sidebar';
 import { AppHeader } from './components/AppHeader';
 import Dashboard from './components/Dashboard';
-import MoodTracker from './components/MoodTracker';
-import Journal from './components/Journal';
-import HabitTracker from './components/HabitTracker';
-import AIReflection from './components/AIReflection';
+import MoodCheckInPage from './components/MoodCheckInPage';
+import DiscoverPage from './components/DiscoverPage';
+import MusicPage from './components/MusicPage';
+import MoviesPage from './components/MoviesPage';
+import ActivitiesPage from './components/ActivitiesPage';
+import CalmToolsPage from './components/CalmToolsPage';
 import CalendarView from './components/CalendarView';
 import Analytics from './components/Analytics';
+import Journal from './components/Journal';
 import ProfileSettings from './components/ProfileSettings';
 import AdminPanel from './components/AdminPanel';
 import AuthModal from './components/AuthModal';
+import OnboardingModal from './components/OnboardingModal';
 import { LandingPage } from './components/LandingPage';
 import { BreathingModal } from './components/BreathingModal';
 import { PageTransition } from './components/motion/PageTransition';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { DataProvider } from './context/DataContext';
-import { LayoutDashboard, Smile, BookOpen, CheckSquare, Sparkles } from 'lucide-react';
+import { Home, Smile, Compass, Calendar, BarChart2 } from 'lucide-react';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isBreathingOpen, setIsBreathingOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [showLanding, setShowLanding] = useState(false);
   const { user, loading, login } = useAuth();
 
@@ -41,21 +46,32 @@ function AppContent() {
           <Dashboard 
             onNavigate={(view) => setCurrentView(view)}
             onOpenBreathing={() => setIsBreathingOpen(true)}
-            onOpenCheckIn={() => setCurrentView('mood')}
+            onOpenCheckIn={() => setCurrentView('check-in')}
           />
         );
-      case 'mood':
-        return <MoodTracker />;
-      case 'journal':
-        return <Journal />;
-      case 'habits':
-        return <HabitTracker />;
-      case 'ai-chat':
-        return <AIReflection />;
+      case 'check-in':
+        return (
+          <MoodCheckInPage 
+            onBack={() => setCurrentView('dashboard')}
+            onSaved={() => setCurrentView('dashboard')}
+          />
+        );
+      case 'discover':
+        return <DiscoverPage />;
+      case 'music':
+        return <MusicPage />;
+      case 'movies':
+        return <MoviesPage />;
+      case 'activities':
+        return <ActivitiesPage />;
+      case 'tools':
+        return <CalmToolsPage />;
       case 'calendar':
         return <CalendarView />;
       case 'analytics':
         return <Analytics />;
+      case 'journal':
+        return <Journal />;
       case 'profile':
         return <ProfileSettings />;
       case 'admin':
@@ -63,7 +79,7 @@ function AppContent() {
           <Dashboard 
             onNavigate={(view) => setCurrentView(view)}
             onOpenBreathing={() => setIsBreathingOpen(true)}
-            onOpenCheckIn={() => setCurrentView('mood')}
+            onOpenCheckIn={() => setCurrentView('check-in')}
           />
         );
       default:
@@ -71,7 +87,7 @@ function AppContent() {
           <Dashboard 
             onNavigate={(view) => setCurrentView(view)}
             onOpenBreathing={() => setIsBreathingOpen(true)}
-            onOpenCheckIn={() => setCurrentView('mood')}
+            onOpenCheckIn={() => setCurrentView('check-in')}
           />
         );
     }
@@ -79,16 +95,16 @@ function AppContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#FBFBF7] flex flex-col items-center justify-center gap-4">
-        <div className="w-12 h-12 border-3 border-[#2D5A46]/20 border-t-[#2D5A46] rounded-full animate-spin" />
-        <p className="text-xs font-semibold text-[#2D5A46] tracking-wider uppercase">
+      <div className="min-h-screen bg-[#F7F9FC] flex flex-col items-center justify-center gap-4">
+        <div className="w-12 h-12 border-3 border-[#176B57]/20 border-t-[#176B57] rounded-full animate-spin" />
+        <p className="text-xs font-semibold text-[#176B57] tracking-wider uppercase">
           Opening Your Sanctuary...
         </p>
       </div>
     );
   }
 
-  // If user is not logged in or chose landing page
+  // If user is not logged in or explicitly clicked Showcase/Landing page
   if (showLanding || !user) {
     return (
       <>
@@ -103,17 +119,17 @@ function AppContent() {
     );
   }
 
-  // Mobile Bottom Navigation Bar (under 15% viewport height cap)
+  // Mobile Bottom Navigation Bar (WCAG 44x44px touch targets)
   const mobileNavItems: Array<{ id: ViewType; label: string; icon: React.ComponentType<{ className?: string }> }> = [
-    { id: 'dashboard', label: 'Home', icon: LayoutDashboard },
-    { id: 'mood', label: 'Mood', icon: Smile },
-    { id: 'journal', label: 'Journal', icon: BookOpen },
-    { id: 'habits', label: 'Habits', icon: CheckSquare },
-    { id: 'ai-chat', label: 'Reflect', icon: Sparkles },
+    { id: 'dashboard', label: 'Home', icon: Home },
+    { id: 'check-in', label: 'Check-in', icon: Smile },
+    { id: 'discover', label: 'Discover', icon: Compass },
+    { id: 'calendar', label: 'Calendar', icon: Calendar },
+    { id: 'analytics', label: 'Insights', icon: BarChart2 },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAF7] text-[#163327] flex flex-col">
+    <div className="min-h-screen bg-[#F7F9FC] text-[#172B3A] flex flex-col font-sans">
       {/* Sidebar Navigation */}
       <Sidebar 
         currentView={currentView}
@@ -130,8 +146,9 @@ function AppContent() {
           currentView={currentView}
           onOpenSidebar={() => setIsSidebarOpen(true)}
           onOpenBreathing={() => setIsBreathingOpen(true)}
-          onQuickCheckIn={() => setCurrentView('mood')}
+          onQuickCheckIn={() => setCurrentView('check-in')}
           onOpenLanding={() => setShowLanding(true)}
+          onNavigate={(view) => setCurrentView(view)}
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-24 lg:pb-12 max-w-7xl w-full mx-auto">
@@ -142,7 +159,7 @@ function AppContent() {
       </div>
 
       {/* Mobile Bottom Navigation (lg:hidden) */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E5EDE7] px-2 py-2 flex items-center justify-around lg:hidden shadow-lg">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E4EAF0] px-2 py-2 flex items-center justify-around lg:hidden shadow-lg">
         {mobileNavItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentView === item.id;
@@ -150,8 +167,8 @@ function AppContent() {
             <button
               key={item.id}
               onClick={() => setCurrentView(item.id)}
-              className={`flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-xl transition-colors ${
-                isActive ? 'text-[#2D5A46] font-bold' : 'text-[#5C7A6D]'
+              className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-colors min-h-[44px] justify-center ${
+                isActive ? 'text-[#176B57] font-bold' : 'text-[#657587]'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -166,6 +183,14 @@ function AppContent() {
         isOpen={isBreathingOpen}
         onClose={() => setIsBreathingOpen(false)}
       />
+
+      {/* Onboarding Modal if triggered */}
+      {showOnboarding && (
+        <OnboardingModal
+          isOpen={showOnboarding}
+          onComplete={() => setShowOnboarding(false)}
+        />
+      )}
     </div>
   );
 }

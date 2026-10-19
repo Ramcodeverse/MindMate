@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { mindMateStore } from '../store.js';
 import { generateReflectionReply } from '../aiService.js';
+import { MoodCategory } from '../types.js';
 
 export const apiRouter = Router();
 
@@ -116,7 +117,7 @@ apiRouter.get('/moods', authMiddleware, (req: AuthenticatedRequest, res: Respons
 });
 
 apiRouter.post('/moods', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
-  const { moodLevel, moodLabel, note, emotions, energyLevel, date } = req.body;
+  const { moodLevel, moodLabel, note, emotions, energyLevel, stressLevel, contextTags, desiredExperience, date } = req.body;
   if (!moodLevel || !moodLabel) {
     return res.status(400).json({ error: 'moodLevel and moodLabel are required.' });
   }
@@ -126,7 +127,10 @@ apiRouter.post('/moods', authMiddleware, (req: AuthenticatedRequest, res: Respon
     moodLabel,
     note: note || '',
     emotions: Array.isArray(emotions) ? emotions : [],
-    energyLevel: Number(energyLevel) || 5,
+    energyLevel: Number(energyLevel) || 7,
+    stressLevel: Number(stressLevel) || 3,
+    contextTags: Array.isArray(contextTags) ? contextTags : [],
+    desiredExperience: desiredExperience || 'Calm',
     date: date || new Date().toISOString().split('T')[0],
   });
 
@@ -139,6 +143,156 @@ apiRouter.delete('/moods/:id', authMiddleware, (req: AuthenticatedRequest, res: 
     return res.status(404).json({ error: 'Mood entry not found or unauthorized' });
   }
   return res.json({ message: 'Mood entry deleted.' });
+});
+
+// --- Recommendation Endpoints (Personalization Engine) ---
+apiRouter.get('/recommendations', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const type = (req.query.type as 'music' | 'movie' | 'activity' | 'tool' | 'all') || 'all';
+  const intention = req.query.intention as string | undefined;
+  const mood = req.query.mood as MoodCategory | undefined;
+  const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 12;
+  const genre = req.query.genre as string | undefined;
+  const maxDuration = req.query.maxDuration ? parseInt(req.query.maxDuration as string, 10) : undefined;
+
+  const recs = mindMateStore.getRecommendations(req.userId!, {
+    type,
+    intention,
+    mood,
+    limit,
+    genreFilter: genre,
+    maxDurationMinutes: maxDuration
+  });
+
+  return res.json(recs);
+});
+
+apiRouter.post('/recommendations/:id/save', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const isSaved = mindMateStore.toggleSaveContent(req.userId!, req.params.id);
+  return res.json({ id: req.params.id, isSaved });
+});
+
+apiRouter.post('/recommendations/:id/like', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  mindMateStore.likeContent(req.userId!, req.params.id);
+  return res.json({ id: req.params.id, action: 'like', message: 'Marked as liked. Preferences updated.' });
+});
+
+apiRouter.post('/recommendations/:id/dislike', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  mindMateStore.dislikeContent(req.userId!, req.params.id);
+  return res.json({ id: req.params.id, action: 'dislike', message: 'Marked as disliked. This and similar items will be suppressed.' });
+});
+
+apiRouter.post('/recommendations/:id/rate', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const rating = Number(req.body.rating);
+  if (isNaN(rating) || rating < 1 || rating > 5) {
+    return res.status(400).json({ error: 'Rating must be a number between 1 and 5.' });
+  }
+  mindMateStore.rateContent(req.userId!, req.params.id, rating);
+  return res.json({ id: req.params.id, rating, message: `Rated ${rating}★ successfully.` });
+});
+
+apiRouter.post('/recommendations/:id/dismiss', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  mindMateStore.dismissContent(req.userId!, req.params.id);
+  return res.json({ message: 'Recommendation dismissed from your feed.' });
+});
+
+apiRouter.post('/recommendations/:id/feedback', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const { action, value } = req.body;
+  mindMateStore.submitRecommendationFeedback(req.userId!, req.params.id, action || 'fit_feedback', value);
+  return res.json({ message: 'Thank you for your feedback! This helps tune your recommendations.' });
+});
+
+apiRouter.get('/recommendations/saved', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const saved = mindMateStore.getSavedContent(req.userId!);
+  return res.json(saved);
+});
+
+apiRouter.post('/recommendations/reset-preferences', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  mindMateStore.resetLearnedPreferences(req.userId!);
+  return res.json({ message: 'Learned recommendation preferences reset.' });
+});
+
+// --- Catalog Endpoints ---
+apiRouter.get('/catalog/search', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const query = (req.query.q as string) || '';
+  const type = req.query.type as string | undefined;
+  const genre = req.query.genre as string | undefined;
+  const mood = req.query.mood as string | undefined;
+  const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 50;
+
+  const results = mindMateStore.searchCatalog(query, { type, genre, mood, limit });
+  return res.json({ query, count: results.length, items: results });
+});
+
+apiRouter.get('/catalog/movies', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const genre = req.query.genre as string | undefined;
+  const mood = req.query.mood as string | undefined;
+  const q = req.query.q as string | undefined;
+  const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 20;
+
+  const movies = mindMateStore.searchCatalog(q || '', { type: 'movie', genre, mood, limit });
+  return res.json(movies);
+});
+
+apiRouter.get('/catalog/music', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const genre = req.query.genre as string | undefined;
+  const mood = req.query.mood as string | undefined;
+  const q = req.query.q as string | undefined;
+  const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 20;
+
+  const music = mindMateStore.searchCatalog(q || '', { type: 'music', genre, mood, limit });
+  return res.json(music);
+});
+
+apiRouter.get('/catalog/categories', authMiddleware, (_req: AuthenticatedRequest, res: Response) => {
+  return res.json({
+    moodCategories: ['Great', 'Good', 'Okay', 'Low', 'Struggling'],
+    musicGenres: ['Acoustic', 'Indie Folk', 'Ambient', 'Neo-Classical', 'Lo-Fi', 'Down-tempo', 'Psych-Soul'],
+    movieGenres: ['Drama', 'Whimsical Comedy', 'Adventure', 'Animation', 'Science Fiction', 'Family Comedy'],
+    intentions: ['comfort', 'calm', 'reset', 'focus', 'joy', 'energy', 'feel_understood']
+  });
+});
+
+apiRouter.get('/search', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const query = (req.query.q as string) || '';
+  const results = mindMateStore.searchCatalog(query);
+  return res.json(results);
+});
+
+// --- Preference & ML Profile Endpoints ---
+apiRouter.get('/preferences', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const user = mindMateStore.getUserById(req.userId!);
+  if (!user) return res.status(404).json({ error: 'User not found' });
+  const vector = mindMateStore.getUserPreferenceVector(req.userId!);
+  return res.json({
+    preferences: user.preferences,
+    derivedVector: vector ? {
+      genreWeights: vector.genreWeights,
+      likedCount: vector.likedItemIds.size,
+      dislikedCount: vector.dislikedItemIds.size,
+      savedCount: vector.savedItemIds.size,
+      ratedCount: vector.ratedItems.size,
+      lastUpdated: vector.lastUpdated
+    } : null
+  });
+});
+
+apiRouter.put('/preferences', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const user = mindMateStore.updateUserPreferences(req.userId!, req.body);
+  return res.json(user);
+});
+
+apiRouter.delete('/preferences/reset', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  mindMateStore.resetLearnedPreferences(req.userId!);
+  return res.json({ message: 'Preferences and derived vectors successfully reset.' });
+});
+
+// --- ML Model Registry & Benchmarks ---
+apiRouter.get('/ml/models', authMiddleware, (_req: AuthenticatedRequest, res: Response) => {
+  const registry = mindMateStore.getModelRegistry();
+  return res.json({
+    activeModel: registry.getActiveModel(),
+    allModels: registry.getAllModels()
+  });
 });
 
 // --- Journal Endpoints ---

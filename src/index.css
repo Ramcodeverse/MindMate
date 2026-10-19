@@ -8,38 +8,34 @@
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --color-serenity-forest: #174C3C;
-  --color-serenity-evergreen: #102F27;
-  --color-serenity-sage: #A9C7B2;
-  --color-serenity-mint: #E2F1E6;
-  --color-serenity-ivory: #F8F7F1;
-  --color-serenity-white: #FFFFFF;
-  --color-serenity-lavender: #EAE6F7;
-  --color-serenity-peach: #F4DDD0;
-  --color-serenity-primary: #20352C;
-  --color-serenity-secondary: #66766C;
-  --color-serenity-border: #E3E9E2;
-}
+  
+  --color-canvas: #FAFCF9;
+  --color-forest-dark: #142E1F;
+  --color-forest: #176B57;
+  --color-forest-deep: #104C40;
+  --color-forest-light: #2D5A46;
+  --color-sage-soft: #EDF4EF;
+  --color-sage-mist: #F4F8F5;
 
-html {
-  scroll-behavior: smooth;
-}
+  /* Global Motion Tokens (Section 1) */
+  --motion-instant: 100ms;
+  --motion-fast: 150ms;
+  --motion-normal: 200ms;
+  --motion-medium: 280ms;
+  --motion-slow: 420ms;
+  --motion-reveal: 550ms;
+  --motion-ambient: 8000ms;
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-serenity-ivory);
-  color: var(--color-serenity-primary);
+  background-color: #F7F9FC;
+  color: #172B3A;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -50,26 +46,19 @@ body {
   font-family: var(--font-serif);
 }
 
-/* Glassmorphism styling matching the reference mockups */
+/* Glassmorphism styling */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.glass-panel-dark {
-  background: rgba(20, 46, 31, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .glass-pill {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 /* Tabular figures for data tables, metrics, streaks */
@@ -87,15 +76,222 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(31, 61, 43, 0.15);
+  background: rgba(23, 107, 87, 0.15);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(31, 61, 43, 0.3);
+  background: rgba(23, 107, 87, 0.3);
 }
 
 /* Accessible focus ring */
 *:focus-visible {
-  outline: 2px solid #1F3D2B;
+  outline: 2px solid #176B57;
   outline-offset: 2px;
+}
+
+/* --- MOTION DESIGN SYSTEM & KEYFRAMES --- */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Motion Utilities */
+.animate-fade-in {
+  animation: fadeIn var(--motion-normal) var(--ease-enter) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--motion-medium) var(--ease-enter) forwards;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown var(--motion-fast) var(--ease-enter) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--motion-normal) var(--ease-enter) forwards;
+}
+
+.animate-modal-backdrop {
+  animation: modalBackdrop var(--motion-fast) var(--ease-enter) forwards;
+}
+
+.animate-modal-enter {
+  animation: modalEnter var(--motion-normal) var(--ease-enter) forwards;
+}
+
+.animate-float-gentle {
+  animation: floatGentle var(--motion-ambient) ease-in-out infinite;
+}
+
+/* SVG Line Chart Animated Path */
+.chart-line-animated {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: drawLine 650ms var(--ease-standard) forwards;
+}
+
+/* Reusable Button Pressed & Hover Interactions (Section 5) */
+.btn-motion {
+  transition: transform var(--motion-fast) var(--ease-standard),
+              background-color var(--motion-fast) var(--ease-standard),
+              border-color var(--motion-fast) var(--ease-standard),
+              box-shadow var(--motion-fast) var(--ease-standard),
+              color var(--motion-fast) var(--ease-standard);
+  will-change: transform;
+}
+
+.btn-motion:hover {
+  transform: translateY(-1px);
+}
+
+.btn-motion:active {
+  transform: scale(0.985);
+}
+
+.btn-motion:disabled {
+  transform: none !important;
+  cursor: not-allowed;
+}
+
+/* Card Hover Elevation (Section 10) */
+.card-lift {
+  transition: transform var(--motion-normal) var(--ease-standard),
+              box-shadow var(--motion-normal) var(--ease-standard),
+              border-color var(--motion-normal) var(--ease-standard);
+  will-change: transform;
+}
+
+.card-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Image Zoom in Container (Section 10) */
+.img-zoom {
+  transition: transform var(--motion-medium) var(--ease-standard);
+  will-change: transform;
+}
+
+.card-lift:hover .img-zoom {
+  transform: scale(1.035);
+}
+
+/* Chip / Pill Filter Transition */
+.chip-motion {
+  transition: background-color var(--motion-fast) var(--ease-standard),
+              color var(--motion-fast) var(--ease-standard),
+              border-color var(--motion-fast) var(--ease-standard),
+              transform var(--motion-fast) var(--ease-standard);
+}
+
+.chip-motion:hover {
+  transform: translateY(-0.5px);
+}
+
+.chip-motion:active {
+  transform: scale(0.98);
+}
+
+/* Accordion expand helper */
+.accordion-content {
+  transition: max-height var(--motion-medium) var(--ease-standard),
+              opacity var(--motion-medium) var(--ease-standard);
+}
+
+/* --- GLOBAL REDUCED MOTION (Section 22) --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .chart-line-animated {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+
+  .card-lift:hover {
+    transform: none !important;
+  }
+
+  .card-lift:hover .img-zoom {
+    transform: none !important;
+  }
+
+  .btn-motion:hover,
+  .btn-motion:active {
+    transform: none !important;
+  }
 }

@@ -1,0 +1,31 @@
+{
+  "dataset": "MindMate Normalized Music Catalog (Free Music Archive & Open Artists Grounded)",
+  "total_tracks": 6,
+  "valid_tracks": 6,
+  "unique_genres": [
+    "Acoustic",
+    "Acoustic Folk",
+    "Ambient",
+    "Ambient Chamber",
+    "Ambient Electronic",
+    "Chillwave",
+    "Desert Instrumental",
+    "Downtempo",
+    "Generative Soundscape",
+    "Indie Folk",
+    "Minimalist Ambient",
+    "Neo-Classical Piano",
+    "Psych-Soul",
+    "Singer-Songwriter",
+    "World Grooves"
+  ],
+  "mood_distribution": {
+    "Low": 4,
+    "Struggling": 4,
+    "Okay": 5,
+    "Good": 4,
+    "All": 6,
+    "Great": 2
+  },
+  "output_path": "/app/applet/data/processed/music_catalog.json"
+}

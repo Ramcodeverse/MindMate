@@ -1,0 +1,17 @@
+{
+  "verified_at": "2026-10-19T05:20:00Z",
+  "datasets": {
+    "movielens_100k": {
+      "source_url": "https://files.grouplens.org/datasets/movielens/ml-100k.zip",
+      "license": "Non-commercial research license (University of Minnesota)",
+      "status": "ready_for_ingestion",
+      "destination": "/app/applet/data/raw/ml-100k.zip"
+    },
+    "fma_metadata": {
+      "source_url": "https://os.unil.cloud.switch.ch/fma/fma_metadata.zip",
+      "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "status": "ready_for_ingestion",
+      "destination": "/app/applet/data/raw/fma_metadata.zip"
+    }
+  }
+}

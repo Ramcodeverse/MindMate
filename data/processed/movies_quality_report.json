@@ -1,0 +1,30 @@
+{
+  "dataset": "MindMate Normalized Movie Catalog (MovieLens & TMDB Grounded)",
+  "total_movies": 8,
+  "valid_movies": 8,
+  "unique_genres": [
+    "Adventure",
+    "Animation",
+    "Comedy",
+    "Drama",
+    "Family Comedy",
+    "Fantasy",
+    "Gentle Fantasy",
+    "Humanities",
+    "Philosophical Drama",
+    "Road Film",
+    "Romantic Drama",
+    "Science Fiction",
+    "Whimsical Adventure",
+    "Whimsical Comedy"
+  ],
+  "mood_distribution": {
+    "Great": 2,
+    "Good": 7,
+    "Okay": 6,
+    "All": 8,
+    "Low": 6,
+    "Struggling": 3
+  },
+  "output_path": "/app/applet/data/processed/movies_catalog.json"
+}

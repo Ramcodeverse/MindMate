@@ -155,6 +155,63 @@ export const ProfileSettings: React.FC = () => {
             </button>
           </div>
 
+          {/* Machine Learning Recommendation Personalization Toggle */}
+          <div className="p-4 rounded-2xl bg-[#F7FAF8] border border-[#E0EBE3] flex items-start justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-[#2D5A46]" />
+                <span className="text-xs font-bold text-[#163327]">
+                  Personalized Recommendation Engine (ML)
+                </span>
+              </div>
+              <p className="text-xs text-[#527061] leading-relaxed">
+                When enabled, MindMate uses your interaction history (likes, dislikes, saves) to tune music and cinema recommendations. When disabled, recommendations rely purely on non-personalized popularity and stated category filters.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={async () => {
+                const currentStatus = user?.preferences?.personalizationEnabled ?? true;
+                await updateUserPreferences({ personalizationEnabled: !currentStatus });
+                setIsSaved(true);
+                setTimeout(() => setIsSaved(false), 3000);
+              }}
+              className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors shrink-0 ${
+                (user?.preferences?.personalizationEnabled ?? true) ? 'bg-[#2D5A46]' : 'bg-stone-300'
+              }`}
+            >
+              <div
+                className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
+                  (user?.preferences?.personalizationEnabled ?? true) ? 'translate-x-6' : 'translate-x-0'
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Reset Learned Preferences Control */}
+          <div className="p-4 rounded-2xl bg-[#FFFBF0] border border-[#F3E5C8] flex items-center justify-between gap-4">
+            <div>
+              <span className="text-xs font-bold text-[#8A6D28] block">
+                Reset Learned Preferences & Feedback Vectors
+              </span>
+              <p className="text-xs text-[#8A6D28]/80 mt-0.5">
+                Clears all learned weights, dismissals, and preference profiles back to initial onboarding defaults.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={async () => {
+                if (window.confirm('Reset your learned machine-learning taste vectors back to baseline?')) {
+                  await api.resetRecommendationPreferences();
+                  alert('Recommendation preference vectors reset to baseline.');
+                }
+              }}
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#8A6D28] text-white hover:bg-[#70561E] transition-colors shrink-0"
+            >
+              Reset Vector Profile
+            </button>
+          </div>
+
           <div className="flex items-center justify-between pt-2">
             {isSaved ? (
               <span className="text-xs text-[#2D5A46] font-semibold">
