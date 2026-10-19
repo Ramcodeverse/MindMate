@@ -127,3 +127,16 @@ export interface RecommendationItem {
   isSaved?: boolean;
   externalUrl?: string;
 }
+
+export interface MoodPatternInsight {
+  id: string;
+  category: 'sleep' | 'energy' | 'stress' | 'habit' | 'context' | 'timing';
+  title: string;
+  insight: string;
+  supportingData: string;
+  confidence: number;
+  dataPointsCount: number;
+  status: 'active' | 'validated' | 'corrected' | 'dismissed';
+  userCorrection?: string;
+  detectedAt: string;
+}

@@ -14,6 +14,7 @@ import { contentBasedRecommender } from './ml/contentBased.js';
 import { collaborativeRecommender } from './ml/collaborative.js';
 import { popularityRecommender } from './ml/popularity.js';
 import { modelRegistry } from './ml/registry.js';
+import { moodIntelligenceEngine, MoodPatternInsight, UserPatternFeedback } from './ml/moodIntelligence.js';
 
 // Helper for date formatting
 export const getTodayDateString = (offsetDays: number = 0): string => {
@@ -38,6 +39,7 @@ export class MindMateStore {
   private dismissedItems: Map<string, Set<string>> = new Map(); // userId -> Set<contentId>
   private feedbackRecords: RecommendationFeedbackRecord[] = [];
   private userPreferenceVectors: Map<string, UserPreferenceVector> = new Map();
+  private patternFeedbacks: Map<string, Map<string, UserPatternFeedback>> = new Map(); // userId -> patternId -> feedback
 
   constructor() {
     this.seedDefaultData();
@@ -849,30 +851,85 @@ export class MindMateStore {
     });
   }
 
-  public submitRecommendationFeedback(userId: string, contentId: string, action: 'fit_feedback' | 'rate', value: string | number): void {
-    if (action === 'fit_feedback') {
-      const vector = this.getUserPreferenceVector(userId);
-      const item = this.contentCatalog.get(contentId);
+  public submitRecommendationFeedback(
+    userId: string, 
+    contentId: string, 
+    action: string, 
+    value?: string | number
+  ): void {
+    const vector = this.getUserPreferenceVector(userId);
+    const item = this.contentCatalog.get(contentId);
+
+    // Continuous learning loop updates
+    if (action === 'exactly_what_i_wanted' || value === 'exactly_what_i_wanted' || value === 'yes') {
       if (vector && item) {
-        if (value === 'yes') {
-          vector.genreWeights[item.genre] = (vector.genreWeights[item.genre] || 1.0) + 1.0;
-          vector.likedItemIds.add(contentId);
-        } else if (value === 'not_for_me') {
-          vector.genreWeights[item.genre] = (vector.genreWeights[item.genre] || 1.0) - 2.0;
-          this.dismissContent(userId, contentId);
-        }
+        vector.genreWeights[item.genre] = (vector.genreWeights[item.genre] || 1.0) + 2.0;
+        vector.likedItemIds.add(contentId);
+        item.moodAffinities.forEach(m => {
+          vector.moodAffinityWeights[m] = (vector.moodAffinityWeights[m] || 1.0) + 1.0;
+        });
+        vector.lastUpdated = new Date().toISOString();
       }
-    } else if (action === 'rate' && typeof value === 'number') {
-      this.rateContent(userId, contentId, value);
+      this.likeContent(userId, contentId);
+    } else if (action === 'more_like_this' || value === 'more_like_this') {
+      if (vector && item) {
+        vector.genreWeights[item.genre] = (vector.genreWeights[item.genre] || 1.0) + 1.5;
+        vector.likedItemIds.add(contentId);
+        vector.lastUpdated = new Date().toISOString();
+      }
+      popularityRecommender.recordInteraction(contentId, 4.5);
+      collaborativeRecommender.recordInteraction(userId, contentId, 4.5);
+    } else if (action === 'not_for_me' || value === 'not_for_me' || value === 'no') {
+      if (vector && item) {
+        vector.genreWeights[item.genre] = (vector.genreWeights[item.genre] || 1.0) - 2.5;
+        vector.dislikedItemIds.add(contentId);
+        vector.lastUpdated = new Date().toISOString();
+      }
+      this.dismissContent(userId, contentId);
+    } else if (action === 'less_like_this' || value === 'less_like_this') {
+      if (vector && item) {
+        vector.genreWeights[item.genre] = (vector.genreWeights[item.genre] || 1.0) - 1.5;
+        vector.lastUpdated = new Date().toISOString();
+      }
+      popularityRecommender.recordInteraction(contentId, 2.0);
+      collaborativeRecommender.recordInteraction(userId, contentId, 2.0);
+    } else if (action === 'rate' && (typeof value === 'number' || !isNaN(Number(value)))) {
+      this.rateContent(userId, contentId, Number(value));
     }
 
     this.feedbackRecords.push({
       id: `fb_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
       userId,
       contentId,
-      action,
-      value,
+      action: action as 'fit_feedback' | 'rate',
+      value: value ?? 1,
       createdAt: new Date().toISOString()
+    });
+  }
+
+  // --- Mood Intelligence Patterns ---
+  public getMoodPatterns(userId: string): MoodPatternInsight[] {
+    const userMoods = this.getMoodsForUser(userId);
+    const userHabits = this.getHabitsForUser(userId);
+    const feedbackMap = this.patternFeedbacks.get(userId) || new Map<string, UserPatternFeedback>();
+
+    return moodIntelligenceEngine.detectPatterns(userMoods, userHabits, feedbackMap);
+  }
+
+  public submitPatternFeedback(
+    userId: string, 
+    patternId: string, 
+    status: 'validated' | 'corrected' | 'dismissed', 
+    userCorrection?: string
+  ): void {
+    if (!this.patternFeedbacks.has(userId)) {
+      this.patternFeedbacks.set(userId, new Map());
+    }
+    this.patternFeedbacks.get(userId)!.set(patternId, {
+      patternId,
+      status,
+      userCorrection,
+      timestamp: new Date().toISOString()
     });
   }
 

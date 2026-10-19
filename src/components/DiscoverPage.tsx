@@ -396,38 +396,96 @@ export const DiscoverPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Feedback: Did this fit what you needed? */}
-            <div className="pt-3 border-t border-[#F0F4F8] space-y-2">
-              <span className="text-xs font-bold text-[#172B3A] block">
-                Did this fit what you needed?
-              </span>
-              <div className="flex items-center gap-2">
+            {/* Continuous Learning Feedback Loop */}
+            <div className="pt-3 border-t border-[#F0F4F8] space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#172B3A] block">
+                  Continuous Learning Feedback
+                </span>
+                <span className="text-[11px] text-[#8A9BA8]">Incremental profile update</span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
                 <button
-                  onClick={() => {
-                    api.submitRecommendationFeedback(explainItem.id, 'fit_feedback', 'yes');
-                    showToast('Feedback saved! Future recommendations will reflect this.');
+                  onClick={async () => {
+                    await api.submitRecommendationFeedback(explainItem.id, 'exactly_what_i_wanted', 'exactly_what_i_wanted');
+                    showToast('Saved: "Exactly what I wanted"! Genre & mood weights boosted.');
+                    const type = activeTab === 'all' ? undefined : activeTab;
+                    const intention = selectedIntention === 'all' ? undefined : selectedIntention;
+                    const data = await api.getRecommendations({ type, intention, limit: 20 });
+                    setRecommendations(data);
                     setExplainItem(null);
                   }}
-                  className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#E8F5EF] text-[#176B57] hover:bg-[#d5ede1] transition-colors"
+                  className="px-3 py-2 rounded-xl text-xs font-bold bg-[#E8F5EF] text-[#176B57] hover:bg-[#d5ede1] transition-colors text-left flex items-center gap-1.5"
                 >
-                  Yes, exactly
+                  <span>🌟</span>
+                  <span>Exactly what I wanted</span>
                 </button>
+
                 <button
-                  onClick={() => {
-                    api.submitRecommendationFeedback(explainItem.id, 'fit_feedback', 'somewhat');
-                    showToast('Thank you for your feedback!');
+                  onClick={async () => {
+                    await api.submitRecommendationFeedback(explainItem.id, 'more_like_this', 'more_like_this');
+                    showToast('Preference updated: "More like this". Boosting similar candidates.');
+                    const type = activeTab === 'all' ? undefined : activeTab;
+                    const intention = selectedIntention === 'all' ? undefined : selectedIntention;
+                    const data = await api.getRecommendations({ type, intention, limit: 20 });
+                    setRecommendations(data);
                     setExplainItem(null);
                   }}
-                  className="px-3.5 py-1.5 rounded-xl text-xs font-medium bg-[#F7F9FC] text-[#657587] hover:bg-stone-100 transition-colors"
+                  className="px-3 py-2 rounded-xl text-xs font-semibold bg-[#F4F8F5] text-[#176B57] hover:bg-[#e4f0e9] transition-colors text-left flex items-center gap-1.5"
                 >
-                  Somewhat
+                  <span>✨</span>
+                  <span>More like this</span>
                 </button>
+
+                <button
+                  onClick={async () => {
+                    await api.submitRecommendationFeedback(explainItem.id, 'less_like_this', 'less_like_this');
+                    showToast('Preference adjusted: "Less like this". Downweighting tone.');
+                    const type = activeTab === 'all' ? undefined : activeTab;
+                    const intention = selectedIntention === 'all' ? undefined : selectedIntention;
+                    const data = await api.getRecommendations({ type, intention, limit: 20 });
+                    setRecommendations(data);
+                    setExplainItem(null);
+                  }}
+                  className="px-3 py-2 rounded-xl text-xs font-medium bg-[#F7F9FC] text-[#657587] hover:bg-stone-100 transition-colors text-left flex items-center gap-1.5"
+                >
+                  <span>📉</span>
+                  <span>Less like this</span>
+                </button>
+
                 <button
                   onClick={() => handleDismiss(explainItem)}
-                  className="px-3.5 py-1.5 rounded-xl text-xs font-medium text-rose-600 hover:bg-rose-50 transition-colors ml-auto"
+                  className="px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 transition-colors text-left flex items-center gap-1.5"
                 >
-                  Not for me
+                  <span>✕</span>
+                  <span>Not for me</span>
                 </button>
+              </div>
+
+              {/* Star Rating */}
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[11px] text-[#657587]">Explicit Rating:</span>
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      onClick={async () => {
+                        await api.rateRecommendation(explainItem.id, star);
+                        showToast(`Recorded ${star}★ rating. Bayesian item score updated.`);
+                        const type = activeTab === 'all' ? undefined : activeTab;
+                        const intention = selectedIntention === 'all' ? undefined : selectedIntention;
+                        const data = await api.getRecommendations({ type, intention, limit: 20 });
+                        setRecommendations(data);
+                        setExplainItem(null);
+                      }}
+                      className="p-1 hover:scale-125 transition-transform text-amber-400 hover:text-amber-500 text-sm"
+                      title={`Rate ${star} star${star > 1 ? 's' : ''}`}
+                    >
+                      ★
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

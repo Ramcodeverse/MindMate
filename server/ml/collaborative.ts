@@ -1,5 +1,3 @@
-import { RecommendationItem } from '../types.js';
-
 export interface UserInteractionEntry {
   userId: string;
   itemId: string;

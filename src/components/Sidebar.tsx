@@ -52,7 +52,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const { user, logout, switchAccount } = useAuth();
 
   const primaryNavItems: Array<{ id: ViewType; label: string; icon: React.ComponentType<{ className?: string }> }> = [
-    { id: 'dashboard', label: 'Overview', icon: Home },
+    { id: 'dashboard', label: 'Guided Flow', icon: Home },
     { id: 'calendar', label: 'Mood Calendar', icon: CalendarIcon },
     { id: 'analytics', label: 'Insights', icon: BarChart2 },
     { id: 'discover', label: 'Discover', icon: Compass },

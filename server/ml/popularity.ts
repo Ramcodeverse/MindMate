@@ -28,7 +28,7 @@ export class PopularityRecommender {
     const stats = this.itemStats.get(itemId);
     if (!stats || stats.count === 0) {
       // Prior-dominated score for cold items
-      return this.globalMean;
+      return defaultRating;
     }
 
     const v = stats.count;

@@ -1,4 +1,4 @@
-import { User, MoodEntry, JournalEntry, Habit, DashboardSummary, AIConversation } from '../types';
+import { User, MoodEntry, JournalEntry, Habit, DashboardSummary, AIConversation, MoodPatternInsight } from '../types';
 
 const TOKEN_KEY = 'mindmate_auth_token';
 
@@ -61,6 +61,12 @@ export const api = {
       body: JSON.stringify(data),
     }),
   deleteMood: (id: string) => apiFetch<{ message: string }>(`/moods/${id}`, { method: 'DELETE' }),
+  getMoodPatterns: () => apiFetch<{ count: number; patterns: MoodPatternInsight[]; sufficientData: boolean; totalEntriesLogged: number }>('/moods/patterns'),
+  submitPatternFeedback: (id: string, status: 'validated' | 'corrected' | 'dismissed', userCorrection?: string) =>
+    apiFetch<{ message: string }>(`/moods/patterns/${id}/feedback`, {
+      method: 'POST',
+      body: JSON.stringify({ status, userCorrection }),
+    }),
 
   // Journals
   getJournals: (query?: string, tag?: string) => {
@@ -144,7 +150,7 @@ export const api = {
     }),
   dismissRecommendation: (id: string) =>
     apiFetch<{ message: string }>(`/recommendations/${id}/dismiss`, { method: 'POST' }),
-  submitRecommendationFeedback: (id: string, action: 'fit_feedback' | 'rate', value: string | number) =>
+  submitRecommendationFeedback: (id: string, action: string, value?: string | number) =>
     apiFetch<{ message: string }>(`/recommendations/${id}/feedback`, {
       method: 'POST',
       body: JSON.stringify({ action, value }),

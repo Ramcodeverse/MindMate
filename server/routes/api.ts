@@ -145,6 +145,26 @@ apiRouter.delete('/moods/:id', authMiddleware, (req: AuthenticatedRequest, res: 
   return res.json({ message: 'Mood entry deleted.' });
 });
 
+// Mood Intelligence Empirical Patterns
+apiRouter.get('/moods/patterns', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const patterns = mindMateStore.getMoodPatterns(req.userId!);
+  return res.json({
+    count: patterns.length,
+    patterns,
+    sufficientData: patterns.length > 0 || mindMateStore.getMoodsForUser(req.userId!).length >= 3,
+    totalEntriesLogged: mindMateStore.getMoodsForUser(req.userId!).length
+  });
+});
+
+apiRouter.post('/moods/patterns/:id/feedback', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
+  const { status, userCorrection } = req.body;
+  if (!status || !['validated', 'corrected', 'dismissed'].includes(status)) {
+    return res.status(400).json({ error: 'Invalid status. Must be validated, corrected, or dismissed.' });
+  }
+  mindMateStore.submitPatternFeedback(req.userId!, req.params.id, status, userCorrection);
+  return res.json({ message: 'Pattern feedback successfully saved.' });
+});
+
 // --- Recommendation Endpoints (Personalization Engine) ---
 apiRouter.get('/recommendations', authMiddleware, (req: AuthenticatedRequest, res: Response) => {
   const type = (req.query.type as 'music' | 'movie' | 'activity' | 'tool' | 'all') || 'all';

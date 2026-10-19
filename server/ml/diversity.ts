@@ -19,8 +19,8 @@ export class DiversityReranker {
       sim += 0.6;
     } else {
       // Partial genre match (+0.3)
-      const genresA = new Set(itemA.genre.toLowerCase().split(/[\/,·\s]+/));
-      const genresB = itemB.genre.toLowerCase().split(/[\/,·\s]+/);
+      const genresA = new Set(itemA.genre.toLowerCase().split(/[/,·\s]+/));
+      const genresB = itemB.genre.toLowerCase().split(/[/,·\s]+/);
       if (genresB.some(g => genresA.has(g) && g.length > 2)) {
         sim += 0.3;
       }

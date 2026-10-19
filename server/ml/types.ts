@@ -1,4 +1,4 @@
-import { ContentType, MoodCategory, RecommendationItem } from '../types.js';
+import { ContentType, MoodCategory } from '../types.js';
 
 export interface UserPreferenceVector {
   userId: string;

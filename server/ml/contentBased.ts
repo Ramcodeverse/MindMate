@@ -42,7 +42,7 @@ export class ContentBasedRecommender {
       const termSet = new Set<string>();
       
       // Genre terms (high importance prefix)
-      item.genre.split(/[\/,·\s]+/).forEach(g => {
+      item.genre.split(/[/,·\s]+/).forEach(g => {
         if (g.trim()) termSet.add(`genre:${g.trim().toLowerCase()}`);
       });
 
@@ -71,7 +71,7 @@ export class ContentBasedRecommender {
       const vector = new Map<string, number>();
 
       // Genre features (weight 3.0)
-      item.genre.split(/[\/,·\s]+/).forEach(g => {
+      item.genre.split(/[/,·\s]+/).forEach(g => {
         const key = `genre:${g.trim().toLowerCase()}`;
         if (g.trim()) {
           const idf = Math.log((this.totalDocuments + 1) / ((this.documentFrequencies.get(key) || 1) + 1)) + 1;
@@ -138,8 +138,11 @@ export class ContentBasedRecommender {
    */
   public buildUserVector(
     profile: UserPreferenceVector,
-    catalog: Map<string, RecommendationItem>
+    catalog?: Map<string, RecommendationItem>
   ): Map<string, number> {
+    if (catalog && catalog.size > 0 && this.itemVectors.size === 0) {
+      this.indexCatalog(Array.from(catalog.values()));
+    }
     const userVector = new Map<string, number>();
 
     // 1. Incorporate explicit genre preferences
