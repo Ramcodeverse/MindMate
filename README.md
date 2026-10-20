@@ -2,20 +2,20 @@
 
 # 🌿 MindMate
 
-### *Your Personal Mental Wellness Sanctuary & Emotional Companion*
+### *AI-Integrated Mental Wellness Sanctuary & Emotional Companion*
 
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-5.x-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
-[![Gemini](https://img.shields.io/badge/Google_Gemini-3.8_Flash-8E75B2?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Google Gemini](https://img.shields.io/badge/Google_Gemini-3.8_Flash-8E75B2?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Tests](https://img.shields.io/badge/Tests-26%2F26_Passing-10B981?style=for-the-badge&logo=checkmarx&logoColor=white)](tests/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 <br />
 
-**Mindful Check-Ins · Distraction-Free Journaling · Habit Anchors · Server-Side Gemini AI Reflection · Mood-Responsive Music & Cinema · Web Audio Soundscapes**
+**6-Stage AI Guided Workflow · Empathetic Gemini 3.8 Flash Conversation · Psychological Auto-Calibration · Mood-Responsive Music & Cinema · Vagus Nerve Breathwork · Distraction-Free Journal**
 
 <br />
 
@@ -23,7 +23,7 @@
 
 <br />
 
-<img src="docs/screenshots/01-landing-hero.png" alt="MindMate Wellness Dashboard" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" />
+<img src="docs/screenshots/01-guided-flow-mood.png" alt="MindMate AI Guided Flow Sanctuary" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(23,107,87,0.12); border: 1px solid #E4EAF0;" />
 
 </div>
 
@@ -32,190 +32,231 @@
 ## 📖 Table of Contents
 
 - [🌿 About MindMate](#-about-mindmate)
-- [🎬 Live App Preview & Walkthrough](#-live-app-preview--walkthrough)
-- [✨ Core Sanctuary Features](#-core-sanctuary-features)
-  - [1. Wellness Dashboard & Daily Snapshot](#1-wellness-dashboard--daily-snapshot)
-  - [2. 5-Level Mood Rhythm & Energy Sliders](#2-5-level-mood-rhythm--energy-sliders)
-  - [3. Habit Anchors with Web Audio Chimes](#3-habit-anchors-with-web-audio-chimes)
-  - [4. Private Journal with Privacy Blur](#4-private-journal-with-privacy-blur)
-  - [5. AI Reflection Sanctuary & Safety Net](#5-ai-reflection-sanctuary--safety-net)
-  - [6. Mood-Responsive Music & Cinema Engine](#6-mood-responsive-music--cinema-engine)
-  - [7. Guided Breathwork & Soundscapes](#7-guided-breathwork--soundscapes)
-  - [8. Calendar Analytics & Day Inspector](#8-calendar-analytics--day-inspector)
-- [🛠️ Architecture & Tech Stack](#️-architecture--tech-stack)
+- [🎬 Live App Preview & Animated Navigation](#-live-app-preview--animated-navigation)
+- [🤖 Multi-Stage AI Guided Architecture](#-multi-stage-ai-guided-architecture)
+  - [Phase 1: Momentary Mood & Energy Check-in](#phase-1-momentary-mood--energy-check-in)
+  - [Phase 2: Psychological Profile Auto-Configuration](#phase-2-psychological-profile-auto-configuration)
+  - [Phase 3: Conversational AI Check-in Agent](#phase-3-conversational-ai-check-in-agent)
+  - [Phase 4 & 5: Unified Gemini 3.8 Flash Recommendations](#phase-4--5-unified-gemini-38-flash-recommendations)
+  - [Phase 6: Closed-Loop Feedback & Continuous Learning](#phase-6-closed-loop-feedback--continuous-learning)
+- [✨ Core Sanctuary Modules](#-core-sanctuary-modules)
+  - [1. Personalized Intelligence Discover Hub](#1-personalized-intelligence-discover-hub)
+  - [2. Calm Tools Sanctuary & Rhythmic Breathing Pacer](#2-calm-tools-sanctuary--rhythmic-breathing-pacer)
+  - [3. Mood Calendar & Deep Day Inspector](#3-mood-calendar--deep-day-inspector)
+  - [4. Empirical Patterns & Grounded Insights](#4-empirical-patterns--grounded-insights)
+  - [5. Safe, Distraction-Free Journaling](#5-safe-distraction-free-journaling)
+  - [6. Product Showcase & Onboarding Tour](#6-product-showcase--onboarding-tour)
+- [🛠️ Full-Stack Architecture & Security](#️-full-stack-architecture--security)
 - [🚀 Quick Start & Installation](#-quick-start--installation)
-- [👤 Demo Accounts](#-demo-accounts)
-- [🧪 Automated Test Evidence](#-automated-test-evidence)
-- [🛡️ Privacy, Ethics & Safety Guardrails](#️-privacy-ethics--safety-guardrails)
+- [👤 Demo Accounts & Role Switcher](#-demo-accounts--role-switcher)
+- [🧪 Automated Test Evidence (26/26 Passing)](#-automated-test-evidence-2626-passing)
+- [🛡️ Privacy, Non-Clinical Boundaries & Crisis Safety](#️-privacy-non-clinical-boundaries--crisis-safety)
 - [📄 License & Author](#-license--author)
 
 ---
 
 ## 🌿 About MindMate
 
-Modern life bombards us with high-stimulation notifications, aggressive gamification, and endless digital noise. **MindMate** was built from the ground up as a **peaceful digital sanctuary**—an intentional, emotionally intelligent space designed to help you slow down, tune into your nervous system, and build sustainable wellness rituals.
+**MindMate** is an AI-integrated mental wellness sanctuary crafted to provide a serene, non-intrusive space to check in with yourself, explore restorative media, and receive personalized emotional support.
 
-### 🌟 Design Philosophy
-- **Gentle, Non-Coercive Consistency:** Streaks celebrate your presence without punitive guilt mechanics.
-- **Calm Visual Architecture:** Soothing forest sage (`#176B57`), morning mist (`#EDF4EF`), and warm ivory (`#F7F9FC`) color palette paired with clear typography.
-- **Strict Privacy & Data Sovereignty:** Zero third-party trackers, instant one-click data export, and full account cascading erasure.
-- **Empathetic Server-Side AI:** Powered by **Google Gemini 3.8 Flash** with immediate graceful offline fallbacks and 24/7 crisis safety intervention.
+Unlike standard wellness apps that bombard users with guilt-inducing streaks, ads, and clinical questionnaires, MindMate couples **grounded psychological empathy** with **Google Gemini 3.8 Flash** to deliver a personalized 6-stage wellness journey:
+
+- **Empathetic AI Companion:** Listens without judgment, reframes cognitive friction, and suggests achievable micro-actions.
+- **Domain Separation:** Temporary emotional states guide immediate media and breathing suggestions without overwriting or corrupting your long-term taste vectors.
+- **Multilingual Cultural Inclusivity:** Full support for English, Telugu, Hindi, Tamil, Kannada, and Malayalam across responses, cinema, and music.
+- **Privacy by Default:** 100% server-side API proxy protection, in-memory zero-tracker architecture, and one-click data portability.
 
 ---
 
-## 🎬 Live App Preview & Walkthrough
+## 🎬 Live App Preview & Animated Navigation
 
-### 🚀 Interactive Dashboard Experience
-Watch the seamless transition between daily emotional check-ins, habit tracking, and quick calm exercises:
+### 🚀 Real-Time Navigation Walkthrough
+Watch the fluid transition across the entire MindMate application—from the **AI Guided Flow** to the **Personalized Discover Hub**, **Mood Calendar**, **Empirical Insights**, **Calm Tools**, and **Private Journal**:
 
 <div align="center">
-  <img src="docs/gifs/mindmate-dashboard-navigation.gif" alt="MindMate Navigation Walkthrough" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 8px 24px rgba(23,107,87,0.1);" />
-  <p><em>Fluid page transitions, responsive navigation, and real-time wellness status updates</em></p>
+  <img src="docs/gifs/mindmate-dashboard-navigation.gif" alt="MindMate Live Navigation Walkthrough" width="100%" style="border-radius: 12px; border: 1px solid #E4EAF0; box-shadow: 0 10px 30px rgba(23,107,87,0.1);" />
+  <p><em>Real live recording: Seamless view switches, zero-flicker transitions, and persistent botanical design tokens.</em></p>
 </div>
 
 ---
 
-## ✨ Core Sanctuary Features
+## 🤖 Multi-Stage AI Guided Architecture
 
-### 1. Wellness Dashboard & Daily Snapshot
-A centralized morning or evening home base providing a glanceable summary of your emotional baseline, habit momentum, and restorative actions.
-
-<div align="center">
-  <img src="docs/screenshots/01-landing-hero.png" alt="MindMate Dashboard" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0;" />
-</div>
-
-- **Dynamic Emotional Greeting:** Context-aware time-of-day greeting reflecting your logged energy levels.
-- **Quick-Calm Header Bar:** Instant triggers for synthesized ambient nature audio, 4-7-8 breathing, and rapid mood check-ins.
-- **Metric Cards:** Tabular metrics for current streaks, today's habit completion ratio, and total saved reflections.
-
----
-
-### 2. 5-Level Mood Rhythm & Energy Sliders
-Log your emotional state in less than 30 seconds with fine-grained emotional nuances.
-
-<div align="center">
-  <img src="docs/screenshots/03-mood-tracker.png" alt="MindMate Mood Tracker" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0;" />
-</div>
-
-- **5 Holistic Mood Levels:** *Excellent, Good, Okay, Low, Difficult* with corresponding color gradients and icon motifs.
-- **Physical Energy Slider (1–10):** Differentiates emotional state from bodily exhaustion.
-- **Nuance & Trigger Tag Cloud:** Select tags like *Work, Relationships, Sleep, Growth, Nature, Overwhelmed* or enter custom tags.
-- **Historical 7-Day Trend:** Visual bar chart depicting emotional stability across the week.
-
----
-
-### 3. Habit Anchors with Web Audio Chimes
-Build healthy routines through positive reinforcement rather than punitive pressure.
-
-<div align="center">
-  <img src="docs/gifs/mindmate-habit-completion.gif" alt="Habit Completion Animation" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0;" />
-</div>
-
-<div align="center">
-  <img src="docs/screenshots/05-habit-dashboard.png" alt="Habit Dashboard" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0; margin-top: 12px;" />
-</div>
-
-- **7-Day Completion Matrix:** Interactive grid displaying completion circles for each anchor habit.
-- **Harmonic Audio Chimes:** Built-in Web Audio API synthesizes a gentle pentatonic chime upon habit completion without external audio files.
-- **Consecutive Streak Intelligence:** Algorithmic calculation that credits yesterday's streak without punishing early morning check-ins.
-
----
-
-### 4. Private Journal with Privacy Blur
-A distraction-free, mindful writing space for brain dumping, gratitude, and emotional release.
-
-<div align="center">
-  <img src="docs/screenshots/04-journal-editor.png" alt="Journal Editor" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0;" />
-</div>
-
-- **Live Autosave:** Real-time persistence ensures you never lose an insightful thought.
-- **Privacy Blur Shield:** One-click eye icon blurs all journal text for complete privacy in public settings or shared spaces.
-- **Metadata Analytics:** Instant word count, reading time estimation, and emotional tag association.
-- **Search & Tag Filters:** Filter past entries by keywords or categorized emotions.
-
----
-
-### 5. AI Reflection Sanctuary & Safety Net
-Engage in compassionate, thoughtful dialogue with a companion dedicated to active listening and cognitive reframing.
-
-<div align="center">
-  <img src="docs/screenshots/07-ai-companion.png" alt="AI Reflection Companion" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0;" />
-</div>
-
-- **Powered by Google Gemini 3.8 Flash:** Advanced natural language understanding configured with compassionate, non-clinical psychological boundaries.
-- **Server-Side Security:** Zero exposure of Gemini API keys to the browser; all requests pass through Express server proxies.
-- **Offline Curated Fallback:** If the network drops or no API key is provided, a built-in emotional reflection engine seamlessly provides supportive grounding exercises.
-- **Crisis Hotlines Detection:** Automated pattern-matching catches expressions of crisis and immediately renders emergency hotlines (988 Lifeline, Crisis Text Line, international crisis links).
-
----
-
-### 6. Mood-Responsive Music & Cinema Engine
-Receive tailored media recommendations aligned with your exact emotional state and language preferences without distorting your long-term taste profile.
-
-<div align="center">
-  <img src="public/assets/platforms/results-preview.png" alt="Media Recommendations Preview" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0;" />
-</div>
-
-- **Multi-Language Support:** Curated selections in English, Telugu, Hindi, Tamil, and instrumental genres.
-- **Direct Search Links:** Integrated direct one-click searches across **Spotify**, **YouTube Music**, **Netflix**, and **Amazon Prime Video**.
-- **Transparent Reasoning:** Every recommendation includes an explanation of *why* it fits your current stress and energy levels.
-
----
-
-### 7. Guided Breathwork & Soundscapes
-In-app vagus nerve regulation and nervous system deceleration accessible from anywhere in the app.
-
-<div align="center">
-  <img src="docs/screenshots/02-landing-features.png" alt="Calm Tools and Breathwork" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0;" />
-</div>
-
-- **Dual Breathing Protocols:**
-  - **4-7-8 Relaxing Breath:** Inhale 4s, Hold 7s, Exhale 8s (ideal for sleep and anxiety relief).
-  - **4-4-4-4 Box Breathing:** Balanced autonomic regulation (ideal for focus and composure).
-- **Web Audio Ambient Generator:** Synthesizes gentle rain and forest breeze white noise without downloading heavy media files.
-
----
-
-### 8. Calendar Analytics & Day Inspector
-A unified timeline synthesizing your emotional peaks, habit momentum, and journal reflections over time.
-
-<div align="center">
-  <img src="docs/screenshots/06-calendar-analytics.png" alt="Calendar View and Analytics" width="85%" style="border-radius: 8px; border: 1px solid #E4EAF0;" />
-</div>
-
-- **Month Heatmap:** Color-coded calendar cells reflecting daily dominant mood and habit completion dots.
-- **Day Inspector Panel:** Click any past date to review mood ratings, logged journal entries, and completed habits in full detail.
-- **Wellness Insights:** Energy vs. stress trend charts and habit consistency metrics.
-
----
-
-## 🛠️ Architecture & Tech Stack
+MindMate features a signature **6-Phase Sequential AI Workflow** that transforms raw emotional check-ins into actionable wellness care plans.
 
 ```
-MindMate Application
-├── Client (React 18 + TypeScript + Vite + Tailwind CSS)
-│   ├── Context Layer (AuthContext, DataContext)
-│   ├── UI Components (Dashboard, MoodCheckIn, Journal, Habits, Breathwork)
-│   ├── Motion & Animation (Framer Motion + CSS Tokens)
-│   └── Sound Engine (Web Audio API Synthesizers)
+┌─────────────────┐     ┌──────────────────┐     ┌───────────────────┐
+│ Phase 1: Mood   │ ──> │ Phase 2: Profile │ ──> │ Phase 3: Convers. │
+│ Energy & Intent │     │ Psychology Tuning│     │ Empathetic Agent  │
+└─────────────────┘     └──────────────────┘     └───────────────────┘
+                                                           │
+┌─────────────────┐     ┌──────────────────┐               ▼
+│ Phase 6: Feedback│ <── │ Phase 5: Results │ <── ┌───────────────────┐
+│ Continuous Learn│     │ Media & Habits   │     │ Phase 4: Gemini AI│
+└─────────────────┘     └──────────────────┘     │ Unified Synthesis │
+                                                 └───────────────────┘
+```
+
+---
+
+### Phase 1: Momentary Mood & Energy Check-in
+Log your real-time internal state in seconds across 12 psychological archetypes, fine-grained nuance tags, energy sliders (1–10), and desired outcomes.
+
+<div align="center">
+  <img src="docs/screenshots/01-guided-flow-mood.png" alt="Phase 1: Guided Flow Mood" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **12 Primary Emotional Archetypes:** *Happy, Calm, Sad, Stressed, Anxious, Tired, Lonely, Motivated, Overwhelmed, Hopeful, Frustrated, Other*.
+- **Nuanced Secondary Emotions:** Add context (e.g., *Stressed* with underlying *Tiredness*).
+- **Auto-Calibrated Baselines:** Energy and stress baselines automatically adjust upon emotion selection while remaining fully customizable.
+
+---
+
+### Phase 2: Psychological Profile Auto-Configuration
+MindMate's psychological engine maps your momentary state to specific entertainment branches, preserving long-term favorites while adapting to immediate needs.
+
+<div align="center">
+  <img src="docs/screenshots/02-guided-flow-profile.png" alt="Phase 2: Psychological Profile Auto-Config" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **Dynamic Psychological Guidance:** Instant auto-tuning of *Starting Music Direction* and *Possible Movie Direction* based on mood science (e.g., *Happy* activates feel-good comedy and uplifting tempos; *Anxious* selects soothing low frequencies and comforting narratives).
+- **Communication & Regional Preferences:** Response language (English, Telugu, Hindi, Tamil, etc.), viewing region (India, US, UK, etc.), and subtitle/dubbed preferences.
+- **Isolated Taste Profile:** Guaranteed separation ensuring one stressful evening doesn't corrupt your long-term recommendations.
+
+---
+
+### Phase 3: Conversational AI Check-in Agent
+Engage in a friendly, empathetic chat with MindMate's AI conversational bot. It asks adaptive questions regarding your day, fatigue level, sensory comfort, and entertainment boundaries.
+
+<div align="center">
+  <img src="docs/screenshots/03-ai-conversational-agent.png" alt="Phase 3: Conversational AI Agent" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **Interactive Categorized Inquiry:** Covers *Today's Situation*, *Language & Comfort*, *Music Discovery vs. Familiarity*, *Cinema & Activities*, and an optional open-ended question for personalized advice.
+- **Non-Intrusive & Controllable:** Jump between questions, review answers at any point, or type free-form thoughts up to 600 characters.
+- **One Consolidated Request:** Eliminates chat latency by bundling conversation context, mood data, and profile vectors into a single prompt for Gemini 3.8 Flash.
+
+---
+
+### Phase 4 & 5: Unified Gemini 3.8 Flash Recommendations
+The backend synthesizes the conversation into an individualized MindMate wellness plan.
+
+<div align="center">
+  <img src="docs/screenshots/04-ai-recommendations-results.png" alt="Phase 5: AI Recommendation Results" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **Personalized Session Interpretation:** Transparent explanation of your emotional state and the rationale behind every recommendation.
+- **Personalized Restorative Habit:** Achievable micro-action (e.g., *5-Minute Screen-Free Mindful Reset*) with numbered steps and gentle alternatives.
+- **Restorative Breathwork:** Clinically grounded exercise (e.g., *Gentle Box Breathing & Vagus Nerve Release*) with a one-click launcher for the interactive pacer.
+- **Mood-Responsive Music & Cinema:** 5 verified musical tracks (with direct **Spotify** and **YouTube Music** search links) and 5 feature films (with regional OTT availability badges for **Netflix**, **Prime Video**, **Zee5**, and **Sun NXT**).
+- **Thoughtful AI Answer:** Empathetic direct response to your optional personal question.
+
+---
+
+### Phase 6: Closed-Loop Feedback & Continuous Learning
+Users can rate recommendations (*"Exactly what I wanted"* or *"Not for me today"*), dynamically fine-tuning preference weights in real-time.
+
+---
+
+## ✨ Core Sanctuary Modules
+
+### 1. Personalized Intelligence Discover Hub
+Explore a catalog of mood-aligned playlists, feature films, micro-activities, and soundscapes filtered by intention.
+
+<div align="center">
+  <img src="docs/screenshots/05-discover-hub.png" alt="Discover Hub" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **Intention Filter Chips:** *Comfort & Warmth, Gentle Calm, Lift My Energy, Flow & Focus, Connection, Gentle Reset, Wind Down*.
+- **Category Tabs:** Filter by Music, Movies & Shows, Micro-Activities, or Calm Tools.
+- **Transparent Match Explanations:** Every card explicitly states *why* it was recommended (e.g., *"Recommended because aligned with your good mood and you enjoy Drama"*).
+
+---
+
+### 2. Calm Tools Sanctuary & Rhythmic Breathing Pacer
+Vagus nerve regulation and nervous system deceleration accessible anytime with synthesized audio.
+
+<div align="center">
+  <img src="docs/screenshots/06-calm-tools-sanctuary.png" alt="Calm Tools Sanctuary" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **Multiple Breathing Protocols:**
+  - **4-7-8 Relaxing:** Inhale 4s, Hold 7s, Exhale 8s (nervous system reset).
+  - **Box Breathing (4-4-4-4):** Equal duration pacer for cognitive clarity.
+  - **Calm (4-6 Pace):** Extended exhalation for steady heart rate lowering.
+- **5-Senses Grounding & Audio Synthesizer:** Real-time Web Audio API rain and forest wind generation.
+
+---
+
+### 3. Mood Calendar & Deep Day Inspector
+A unified chronological history of your wellness journey.
+
+<div align="center">
+  <img src="docs/screenshots/07-mood-calendar.png" alt="Mood Calendar" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **Month-at-a-Glance Heatmap:** Color-coded days displaying dominant mood, completed habits count, and journal indicators.
+- **Day Inspector Panel:** Click any date to view exact check-in notes, energy/stress ratings, completed anchors, and reflections.
+
+---
+
+### 4. Empirical Patterns & Grounded Insights
+Objective reflections extracted exclusively from verified check-ins and habits—with zero speculative or fabricated claims.
+
+<div align="center">
+  <img src="docs/screenshots/08-analytics-insights.png" alt="Empirical Patterns and Insights" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **Verified Pattern Cards:** Identifies correlations (e.g., *"Maintaining your streak for Morning Hydration & Stretch acts as a steady psychological anchor on challenging days"*).
+- **User Correction Controls:** Users can confirm (*"Accurate for me"*) or correct any observation.
+- **Emotional Distribution:** Visual bar charts showing percentage breakdown across Great, Good, Okay, Low, and Struggling states.
+
+---
+
+### 5. Safe, Distraction-Free Journaling
+An unhurried space for emotional brain dumps, gratitude, and private thoughts.
+
+<div align="center">
+  <img src="docs/screenshots/09-distraction-free-journal.png" alt="Distraction-Free Journal" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+- **Live Autosave:** Seamless state persistence guarantees no reflection is ever lost.
+- **Privacy Blur Shield:** Click the **Privacy Blur** button to blur all text—ensuring complete privacy in coffee shops or open offices.
+- **Tag Categorization:** Filter reflections by tags like `#MorningRoutine`, `#Gratitude`, `#Nature`, `#Self-Compassion`.
+
+---
+
+### 6. Product Showcase & Onboarding Tour
+A welcoming landing presentation explaining MindMate's mission and guiding first-time visitors into their personal sanctuary.
+
+<div align="center">
+  <img src="docs/screenshots/10-landing-showcase.png" alt="Product Showcase" width="90%" style="border-radius: 10px; border: 1px solid #E4EAF0; box-shadow: 0 6px 20px rgba(0,0,0,0.06);" />
+</div>
+
+---
+
+## 🛠️ Full-Stack Architecture & Security
+
+```
+MindMate System Topology
 │
-└── Backend Server (Node.js 22 + Express 5)
-    ├── Route Controllers (/api/v1/moods, /api/v1/habits, /api/v1/journals)
-    ├── AI Service (Google Gemini 3.8 Flash via @google/genai)
-    ├── Curated Fallback Engine (Offline Reflection & Media Database)
-    ├── ML & Recommendation Core (Hybrid Content + Collaborative Filter)
-    └── In-Memory Store & Data Export Handlers
+├── Client Tier (Browser)
+│   ├── React 18 SPA + Vite 5
+│   ├── Tailwind CSS (Calm Palette: #176B57, #EDF4EF, #F7F9FC)
+│   ├── Web Audio API (Synthesized Pentatonic Chimes & Ambient Noise)
+│   └── Zero client-side API keys
+│
+├── Server Tier (Node.js 22 + Express 5)
+│   ├── REST API: /api/v1/moods, /api/v1/recommendations/unified, /api/v1/habits
+│   ├── Gemini 3.8 Flash Proxy (@google/genai SDK)
+│   ├── Built-In Curated Fallback Recommendation Engine
+│   └── Crisis Intent Scanner (Keyword & Sentiment Filter)
+│
+└── Machine Learning & Recommendation Core
+    ├── Content-Based Filtering (Genre, Tone, Duration, Language Vectors)
+    ├── Collaborative Match Engine & Diversity Reranker
+    └── Closed-Loop Continuous Feedback Learner
 ```
-
-| Layer | Technology | Purpose |
-|---|---|---|
-| **Frontend Framework** | React 18 & Vite 5 | Fast, responsive single-page application with modular component design |
-| **Language** | TypeScript 5 | End-to-end static typing and interface contracts |
-| **Styling** | Tailwind CSS 3.4 | Utility-first styling with custom calming aesthetic design tokens |
-| **Backend Runtime** | Node.js 22 & Express 5 | High-performance RESTful API and static asset hosting |
-| **AI Integration** | `@google/genai` (Gemini 3.8 Flash) | High-speed, emotionally supportive empathetic dialogue and recommendations |
-| **Audio** | HTML5 Web Audio API | Zero-dependency procedural synthesis for habit chimes and rain ambience |
-| **Testing** | Node.js Test Runner (`node:test`) | Fast, native unit and integration test verification |
 
 ---
 
@@ -237,26 +278,25 @@ npm install
 ```
 
 ### 3. Configure Environment Variables
-Create your local environment file from the example:
 ```bash
 cp .env.example .env
 ```
 
 Edit `.env`:
 ```env
-# Gemini API Key (Optional: Server automatically activates graceful offline fallback if omitted)
+# Optional: Live Gemini AI reflection and recommendations
 GEMINI_API_KEY=your_gemini_api_key_here
 
 PORT=3000
 NODE_ENV=development
 ```
+> 💡 *Note: If `GEMINI_API_KEY` is omitted, MindMate automatically runs in offline curated mode with zero loss of UI functionality.*
 
-### 4. Start the Application
+### 4. Start Development Server
 ```bash
 npm run dev
 ```
-
-Visit **`http://localhost:3000`** in your browser. The application is ready to use immediately!
+Open **`http://localhost:3000`** in your browser.
 
 ### 5. Production Build
 ```bash
@@ -266,28 +306,27 @@ npm start
 
 ---
 
-## 👤 Demo Accounts
+## 👤 Demo Accounts & Role Switcher
 
-MindMate comes pre-seeded with rich sample accounts:
+MindMate includes pre-seeded user accounts for demonstration:
 
-| Account | Email | Password | Role & Data Included |
+| Account | Email | Password | What's Included |
 |---|---|---|---|
-| **Sarah Johnson** *(Standard Member)* | `sarah.johnson@email.com` | `sarah123` | 10 days of mood data, 3 journal entries, 4 habit anchors with 6-day streak, past reflections |
+| **Sarah Johnson** *(Standard Member)* | `sarah.johnson@email.com` | `sarah123` | 10 days of verified check-ins, 3 journal entries, 4 habit anchors with active streak, past AI plans |
 | **Admin User** *(System Admin)* | `admin@mindmate.com` | `admin123` | Access to the Administrative Directory & System Console |
 
-> 💡 **Quick Switcher:** You can switch roles or log in with one click via the role selector located in the lower left corner of the sidebar!
+> 🌿 **Instant Role Switcher:** Switch between Sarah and Admin at any time using the one-click demo switcher in the bottom-left sidebar footer!
 
 ---
 
-## 🧪 Automated Test Evidence
+## 🧪 Automated Test Evidence (26/26 Passing)
 
-MindMate includes a test suite covering streak algorithms, store operations, crisis safety guards, and recommendation math:
+MindMate includes comprehensive automated test coverage spanning algorithmic recommendations, mood intelligence, streak math, and crisis safety:
 
 ```bash
 npm test
 ```
 
-### Verified Test Results (26/26 Passing)
 ```
 TAP version 13
 # Subtest: MindMate Machine Learning & Recommendation Systems
@@ -331,12 +370,11 @@ ok 2 - MindMate Wellness Core Logic
 
 ---
 
-## 🛡️ Privacy, Ethics & Safety Guardrails
+## 🛡️ Privacy, Non-Clinical Boundaries & Crisis Safety
 
-- **Zero Medical Claims:** MindMate explicitly clarifies in all interactions that it is a wellness companion, not a licensed medical professional, therapist, or diagnostic tool.
-- **Immediate Crisis Intercept:** If user input contains language associated with self-harm or severe distress, standard generation is suspended and verified crisis resources (988 Hotline, Crisis Text Line) are prominently displayed.
-- **Privacy by Default:** No sensitive user journal thoughts or mood entries are ever sent to third parties for advertisement profiling or model training.
-- **GDPR / CCPA Compliant Data Portability:** Download your entire data history in standard JSON format at any time (`/api/v1/users/me/export`).
+- **Non-Clinical Stance:** MindMate explicitly identifies as an empathetic wellness companion. It does not diagnose illnesses, prescribe medication, or replace professional therapy.
+- **24/7 Crisis Safety Intercept:** If user inputs contain indicators of self-harm, normal generation is suspended and verified hotlines (**988 Lifeline**, **Crisis Text Line 741741**, **findahelpline.com**) are surfaced immediately.
+- **Data Sovereignty:** Full data export available at `GET /api/v1/users/me/export` with one-click cascade account deletion.
 
 ---
 
@@ -344,13 +382,12 @@ ok 2 - MindMate Wellness Core Logic
 
 Distributed under the **MIT License**. See `LICENSE` for details.
 
-Developed with 💚 by **[Ram](https://github.com/Ramcodeverse)**  
+Crafted with 💚 by **[Ram](https://github.com/Ramcodeverse)**  
 - 🌐 [Developer Portfolio](https://rams-portfolio-site.netlify.app)  
 - 🐙 [GitHub Profile](https://github.com/Ramcodeverse)  
 - ✉️ Contact: [ramcodeverse@gmail.com](mailto:ramcodeverse@gmail.com)
 
 <div align="center">
-  <img src="docs/screenshots/10-footer.png" alt="MindMate Sanctuary Footer" width="70%" style="border-radius: 8px; margin-top: 20px;" />
   <br />
-  <p><strong>MindMate — Take a slow breath. Your wellness journey is built one quiet, intentional choice at a time.</strong></p>
+  <p><em>Take a slow breath. Your wellness journey is built one quiet, intentional choice at a time.</em></p>
 </div>
