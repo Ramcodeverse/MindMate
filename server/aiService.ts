@@ -93,7 +93,7 @@ export async function generateReflectionReply(
       apiKey,
       httpOptions: {
         headers: {
-          'User-Agent': 'aistudio-build',
+          'User-Agent': 'mindmate-app',
         },
       },
     });
@@ -476,7 +476,7 @@ export async function generateUnifiedRecommendations(
       apiKey,
       httpOptions: {
         headers: {
-          'User-Agent': 'aistudio-build',
+          'User-Agent': 'mindmate-app',
         },
       },
     });

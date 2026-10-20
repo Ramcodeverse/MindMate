@@ -74,7 +74,7 @@ const getMovieOttList = (movie: {
       list.push({
         key,
         name,
-        logo: '/assets/aistudio/image_b5706af7.png',
+        logo: '/assets/platforms/netflix.png',
         url: `https://www.netflix.com/search?q=${encodeURIComponent(movie.title)}`,
         bgClass: 'bg-black hover:bg-neutral-900 border-neutral-700',
       });
@@ -82,7 +82,7 @@ const getMovieOttList = (movie: {
       list.push({
         key,
         name,
-        logo: '/assets/aistudio/image_6f62edc0.png',
+        logo: '/assets/platforms/prime-video.png',
         url: `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=${encodeURIComponent(movie.title)}`,
         bgClass: 'bg-white hover:bg-sky-50 border-[#00A8E1]/30',
       });
@@ -90,7 +90,7 @@ const getMovieOttList = (movie: {
       list.push({
         key,
         name,
-        logo: '/assets/aistudio/image_f96d42a6.png',
+        logo: '/assets/platforms/zee5.png',
         url: `https://www.zee5.com/search?q=${encodeURIComponent(movie.title)}`,
         bgClass: 'bg-black hover:bg-neutral-900 border-neutral-700',
       });
@@ -98,7 +98,7 @@ const getMovieOttList = (movie: {
       list.push({
         key,
         name,
-        logo: '/assets/aistudio/image_fc610234.png',
+        logo: '/assets/platforms/sun-nxt.png',
         url: `https://www.sunnxt.com/search?q=${encodeURIComponent(movie.title)}`,
         bgClass: 'bg-white hover:bg-pink-50 border-[#E5094C]/30',
       });
@@ -2587,7 +2587,7 @@ export const SequentialWorkflow: React.FC<SequentialWorkflowProps> = ({
                               title={`Listen to "${song.title}" on Spotify`}
                             >
                               <img
-                                src="/assets/aistudio/image_7490eade.png"
+                                src="/assets/platforms/spotify.png"
                                 alt="Spotify"
                                 className="h-3.5 w-auto max-w-[55px] object-contain"
                               />
@@ -2602,7 +2602,7 @@ export const SequentialWorkflow: React.FC<SequentialWorkflowProps> = ({
                               title={`Listen to "${song.title}" on Apple Music`}
                             >
                               <img
-                                src="/assets/aistudio/image_ff8d1d04.png"
+                                src="/assets/platforms/apple-music.png"
                                 alt="Apple Music"
                                 className="w-3.5 h-3.5 object-contain rounded-xs"
                               />
@@ -2646,7 +2646,7 @@ export const SequentialWorkflow: React.FC<SequentialWorkflowProps> = ({
                               className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#1DB954]/10 border border-[#1DB954]/25"
                             >
                               <img
-                                src="/assets/aistudio/image_7490eade.png"
+                                src="/assets/platforms/spotify.png"
                                 alt="Spotify"
                                 className="h-3 w-auto max-w-[50px] object-contain"
                               />
@@ -2658,7 +2658,7 @@ export const SequentialWorkflow: React.FC<SequentialWorkflowProps> = ({
                               className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FA2D48]/10 border border-[#FA2D48]/25"
                             >
                               <img
-                                src="/assets/aistudio/image_ff8d1d04.png"
+                                src="/assets/platforms/apple-music.png"
                                 alt="Apple Music"
                                 className="w-3 h-3 object-contain rounded-xs"
                               />
